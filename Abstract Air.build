@@ -1,0 +1,84 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+		<MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+		<AbstractAirMajorVersion>1</AbstractAirMajorVersion>
+		<AbstractAirMinorVersion>0</AbstractAirMinorVersion>
+		<AbstractAirBuildVersion>0</AbstractAirBuildVersion>
+		<AbstractAirRevision>0</AbstractAirRevision>
+		<AbstractAirVersion>$(AbstractAirMajorVersion).$(AbstractAirMinorVersion).$(AbstractAirBuildVersion).$(AbstractAirRevision)</AbstractAirVersion>
+		<AbstractAirBuildNumber>$(BUILD_NUMBER)</AbstractAirBuildNumber>
+	</PropertyGroup>
+	<Import Project="Tools\MSBuild.Community.Tasks.v1.2.0.306\MSBuild.Community.Tasks.Targets"/>
+	<UsingTask AssemblyFile="Tools\GallioBundle-3.1.397.0\bin\Gallio.MsBuildTasks.dll" TaskName="Gallio"/>
+	<ItemGroup>
+		<MainProjects Include="Main\**\*.csproj"/>
+		<TestSupportProjects Include="TestSupport\**\*.csproj"/>
+		<TestProjects Include="Tests\**\*.csproj"/>
+		<AllProjects Include="@(MainProjects);@(TestSupportProjects);@(TestProjects)"/>
+	</ItemGroup>
+	<Target Name="CleanPackage">
+		<RemoveDir Directories="Package" Condition="Exists('Package')"/>
+		<RemoveDir Directories="BuildOutput" Condition="Exists('BuildOutput')"/>
+		<RemoveDir Directories="TestOutput" Condition="Exists('TestOutput')"/>
+	</Target>
+	<Target Name="Clean" DependsOnTargets="CleanPackage">
+		<MSBuild Projects="@(AllProjects)" Targets="Clean"/>
+	</Target>
+	<Target Name="AssemblyInfo" DependsOnTargets="CleanPackage">
+		<Version BuildType="Automatic"
+				RevisionType="Automatic"
+				Major="$(AbstractAirMajorVersion)"
+				Minor="$(AbstractAirMinorVersion)"
+				Build="$(AbstractAirBuildVersion)"
+				Revision="$(AbstractAirRevision)">
+			<Output TaskParameter="Major" PropertyName="FileVersionMajor" />
+			<Output TaskParameter="Minor" PropertyName="FileVersionMinor" />
+			<Output TaskParameter="Build" PropertyName="FileVersionBuild" />
+			<Output TaskParameter="Revision" PropertyName="FileVersionRevision" />
+		</Version>
+
+		<PropertyGroup>
+			<AbstractAirFileVersion>$(FileVersionMajor).$(FileVersionMinor).$(FileVersionBuild).$(FileVersionRevision)</AbstractAirFileVersion>
+		</PropertyGroup>
+
+		<AssemblyInfo CodeLanguage="CS"
+			OutputFile="GlobalAssemblyInfo.cs"
+			AssemblyConfiguration=""
+			AssemblyCompany=""
+			AssemblyProduct="Abstract Air Build $(AbstractAirBuildNumber)"
+			AssemblyCopyright="Copyright © Colin David Scott 2010"
+			AssemblyVersion="$(AbstractAirVersion)"
+			AssemblyFileVersion="$(AbstractAirFileVersion)" />
+	</Target>
+	<Target Name="Build" DependsOnTargets="AssemblyInfo">
+		<MSBuild Projects="@(MainProjects)" Targets="Rebuild">
+			<Output TaskParameter="TargetOutputs" ItemName="BuildOutput"/>
+		</MSBuild>
+	</Target>
+	<Target Name="Test" DependsOnTargets="Build">
+		<RemoveDir Directories="TestOutput\Report" Condition="Exists('TestOutput\Report')"/>
+		<MakeDir Directories="TestOutput\Report"/>
+
+		<MSBuild Projects="@(TestSupportProjects)" Targets="Rebuild"/>
+		
+		<MSBuild Projects="@(TestProjects)" Targets="Rebuild">
+			<Output TaskParameter="TargetOutputs" ItemName="TestOutput"/>
+		</MSBuild>
+
+		<Gallio IgnoreFailures="false"
+				Files="@(TestOutput)"
+				ReportDirectory="TestsOutput\Report"
+				ReportTypes="html;xml">
+			<Output TaskParameter="ExitCode" PropertyName="ExitCode"/>
+		</Gallio>
+	</Target>
+	<Target Name="Package">
+		<MakeDir Directories="Package"/>
+
+		<ItemGroup>
+			<AbstractAirFiles Include="BuildOutput\*.*" Exclude="**\*.pdb"/>
+		</ItemGroup>
+
+		<Zip Files="@(AbstractAirFiles)" ZipFileName="Package\Abstract Air $(AbstractAirVersion) %28$(AbstractAirBuildNumber)%29.zip" WorkingDirectory="BuildOutput"/>
+	</Target>
+</Project>

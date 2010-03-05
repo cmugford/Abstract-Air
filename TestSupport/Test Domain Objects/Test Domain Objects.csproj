@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{005AAC2E-4933-49F1-9C58-3C03A25B0FB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AbstractAir.TestDomainObjects</RootNamespace>
+    <AssemblyName>AbstractAir.TestDomainObjects</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\TestsOutput\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\TestsOutput\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="IEntityInterfaceForNonEntityTestCase.cs" />
+    <Compile Include="IFirstTestInterface.cs" />
+    <Compile Include="INonEntityInterface.cs" />
+    <Compile Include="ISecondTestInterface.cs" />
+    <Compile Include="ITestObject.cs" />
+    <Compile Include="IThirdTestInterface.cs" />
+    <Compile Include="IVersionedTestObject.cs" />
+    <Compile Include="MultiInterfaceTestObject.cs" />
+    <Compile Include="NonEntityInterfaceTestObject.cs" />
+    <Compile Include="NonEntityObject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestObject.cs" />
+    <Compile Include="VersionedTestObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MultiInterfaceTestObject.hbm.xml" />
+    <EmbeddedResource Include="NonEntityInterfaceTestObject.hbm.xml" />
+    <EmbeddedResource Include="NonEntityObject.hbm.xml" />
+    <EmbeddedResource Include="TestObject.hbm.xml" />
+    <EmbeddedResource Include="VersionedTestObject.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Main\Core Persistence Domain\Core Persistence Domain.csproj">
+      <Project>{81CC26B5-E8E3-4563-A43B-D7AE633D0576}</Project>
+      <Name>Core Persistence Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

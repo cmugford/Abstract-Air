@@ -1,0 +1,1 @@
+MainOutput\BuildManager.exe /createdatabase
