@@ -11,14 +11,17 @@
 	<Import Project="Tools\MSBuild.Community.Tasks.v1.2.0.306\MSBuild.Community.Tasks.Targets"/>
 	<UsingTask AssemblyFile="Tools\GallioBundle-3.1.397.0\bin\Gallio.MsBuildTasks.dll" TaskName="Gallio"/>
 	<ItemGroup>
-		<MainProjects Include="Main\**\*.csproj"/>
+		<CoreProjects Include="Core\**\*.csproj"/>
+		<ExampleProjects Include="Example\**\*.csproj"/>
 		<TestSupportProjects Include="TestSupport\**\*.csproj"/>
-		<TestProjects Include="Tests\**\*.csproj"/>
-		<AllProjects Include="@(MainProjects);@(TestSupportProjects);@(TestProjects)"/>
+		<CoreTestProjects Include="Core Tests\**\*.csproj"/>
+		<ExampleTestProjects Include="Example Tests\**\*.csproj"/>
+		<AllProjects Include="@(CoreProjects);@(ExampleProjects);@(TestSupportProjects);@(CoreTestProjects);@(ExampleTestProjects)"/>
 	</ItemGroup>
 	<Target Name="CleanPackage">
 		<RemoveDir Directories="Package" Condition="Exists('Package')"/>
-		<RemoveDir Directories="BuildOutput" Condition="Exists('BuildOutput')"/>
+		<RemoveDir Directories="CoreOutput" Condition="Exists('BuildOutput')"/>
+		<RemoveDir Directories="ExampleOutput" Condition="Exists('BuildOutput')"/>
 		<RemoveDir Directories="TestOutput" Condition="Exists('TestOutput')"/>
 	</Target>
 	<Target Name="Clean" DependsOnTargets="CleanPackage">
@@ -51,17 +54,17 @@
 			AssemblyFileVersion="$(AbstractAirFileVersion)" />
 	</Target>
 	<Target Name="Build" DependsOnTargets="AssemblyInfo">
-		<MSBuild Projects="@(MainProjects)" Targets="Rebuild">
+		<MSBuild Projects="@(CoreProjects);@(ExampleProjects)" Targets="Rebuild">
 			<Output TaskParameter="TargetOutputs" ItemName="BuildOutput"/>
 		</MSBuild>
 	</Target>
 	<Target Name="Test" DependsOnTargets="Build">
-		<RemoveDir Directories="TestOutput\Report" Condition="Exists('TestOutput\Report')"/>
-		<MakeDir Directories="TestOutput\Report"/>
+		<RemoveDir Directories="TestsOutput\Report" Condition="Exists('TestsOutput\Report')"/>
+		<MakeDir Directories="TestsOutput\Report"/>
 
 		<MSBuild Projects="@(TestSupportProjects)" Targets="Rebuild"/>
 		
-		<MSBuild Projects="@(TestProjects)" Targets="Rebuild">
+		<MSBuild Projects="@(CoreTestProjects);@(ExampleTestProjects)" Targets="Rebuild">
 			<Output TaskParameter="TargetOutputs" ItemName="TestOutput"/>
 		</MSBuild>
 
@@ -71,14 +74,5 @@
 				ReportTypes="html;xml">
 			<Output TaskParameter="ExitCode" PropertyName="ExitCode"/>
 		</Gallio>
-	</Target>
-	<Target Name="Package">
-		<MakeDir Directories="Package"/>
-
-		<ItemGroup>
-			<AbstractAirFiles Include="BuildOutput\*.*" Exclude="**\*.pdb"/>
-		</ItemGroup>
-
-		<Zip Files="@(AbstractAirFiles)" ZipFileName="Package\Abstract Air $(AbstractAirVersion) %28$(AbstractAirBuildNumber)%29.zip" WorkingDirectory="BuildOutput"/>
 	</Target>
 </Project>

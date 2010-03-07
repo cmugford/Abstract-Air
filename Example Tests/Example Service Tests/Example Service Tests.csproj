@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{005AAC2E-4933-49F1-9C58-3C03A25B0FB5}</ProjectGuid>
+    <ProjectGuid>{46C0FE22-43A6-4EA5-AFE2-CDA676A6AA0B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AbstractAir.TestDomainObjects</RootNamespace>
-    <AssemblyName>AbstractAir.TestDomainObjects</AssemblyName>
+    <RootNamespace>AbstractAir.Examples.ExampleService.Tests</RootNamespace>
+    <AssemblyName>AbstractAir.Examples.ExampleService.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,29 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gallio, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Tools\GallioBundle-3.1.397.0\bin\Gallio.dll</HintPath>
+    </Reference>
+    <Reference Include="MbUnit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Tools\GallioBundle-3.1.397.0\bin\MbUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus, Version=2.1.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Host, Version=2.1.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\NServiceBus.Host.exe</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Tools\Rhino Mocks 3.6\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,31 +70,25 @@
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="IEntityInterfaceForNonEntityTestCase.cs" />
-    <Compile Include="IFirstTestInterface.cs" />
-    <Compile Include="INonEntityInterface.cs" />
-    <Compile Include="ISecondTestInterface.cs" />
-    <Compile Include="ITestObject.cs" />
-    <Compile Include="IThirdTestInterface.cs" />
-    <Compile Include="IVersionedTestObject.cs" />
-    <Compile Include="MultiInterfaceTestObject.cs" />
-    <Compile Include="NonEntityInterfaceTestObject.cs" />
-    <Compile Include="NonEntityObject.cs" />
+    <Compile Include="CreateProductMessageHandlerTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestObject.cs" />
-    <Compile Include="VersionedTestObject.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MultiInterfaceTestObject.hbm.xml" />
-    <EmbeddedResource Include="NonEntityInterfaceTestObject.hbm.xml" />
-    <EmbeddedResource Include="NonEntityObject.hbm.xml" />
-    <EmbeddedResource Include="TestObject.hbm.xml" />
-    <EmbeddedResource Include="VersionedTestObject.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core Persistence Domain\Core Persistence Domain.csproj">
       <Project>{81CC26B5-E8E3-4563-A43B-D7AE633D0576}</Project>
       <Name>Core Persistence Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Example\Example Domain\Example Domain.csproj">
+      <Project>{09D7E5C5-399E-419B-A23E-F2EB32AE3410}</Project>
+      <Name>Example Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Example\Example Internal Messages\Example Internal Messages.csproj">
+      <Project>{7A13BD00-3F82-4073-A777-EB60C5757890}</Project>
+      <Name>Example Internal Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Example\Example Service\Example Service.csproj">
+      <Project>{A9E06A66-60B2-400D-ABFE-E912B168AF82}</Project>
+      <Name>Example Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

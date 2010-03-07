@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{005AAC2E-4933-49F1-9C58-3C03A25B0FB5}</ProjectGuid>
+    <ProjectGuid>{E7DFF50E-6875-4675-B94C-0866DA1C4068}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AbstractAir.TestDomainObjects</RootNamespace>
-    <AssemblyName>AbstractAir.TestDomainObjects</AssemblyName>
+    <RootNamespace>AbstractAir.Examples.Domain.Tests</RootNamespace>
+    <AssemblyName>AbstractAir.Examples.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gallio, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Tools\GallioBundle-3.1.397.0\bin\Gallio.dll</HintPath>
+    </Reference>
+    <Reference Include="MbUnit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Tools\GallioBundle-3.1.397.0\bin\MbUnit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,31 +58,17 @@
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="IEntityInterfaceForNonEntityTestCase.cs" />
-    <Compile Include="IFirstTestInterface.cs" />
-    <Compile Include="INonEntityInterface.cs" />
-    <Compile Include="ISecondTestInterface.cs" />
-    <Compile Include="ITestObject.cs" />
-    <Compile Include="IThirdTestInterface.cs" />
-    <Compile Include="IVersionedTestObject.cs" />
-    <Compile Include="MultiInterfaceTestObject.cs" />
-    <Compile Include="NonEntityInterfaceTestObject.cs" />
-    <Compile Include="NonEntityObject.cs" />
+    <Compile Include="ProductTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestObject.cs" />
-    <Compile Include="VersionedTestObject.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MultiInterfaceTestObject.hbm.xml" />
-    <EmbeddedResource Include="NonEntityInterfaceTestObject.hbm.xml" />
-    <EmbeddedResource Include="NonEntityObject.hbm.xml" />
-    <EmbeddedResource Include="TestObject.hbm.xml" />
-    <EmbeddedResource Include="VersionedTestObject.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core Persistence Domain\Core Persistence Domain.csproj">
       <Project>{81CC26B5-E8E3-4563-A43B-D7AE633D0576}</Project>
       <Name>Core Persistence Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Example\Example Domain\Example Domain.csproj">
+      <Project>{09D7E5C5-399E-419B-A23E-F2EB32AE3410}</Project>
+      <Name>Example Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

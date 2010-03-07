@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<domains>
+	<domain connectionString="Server=localhost; Initial Catalog=ExampleService; Integrated Security=SSPI;">
+		<assembly>AbstractAir.Examples.Domain</assembly>
+	</domain>
+</domains>

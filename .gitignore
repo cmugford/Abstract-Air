@@ -11,5 +11,7 @@ _ReSharper.*
 *.cache
 ~$*
 *.swp
-MainOutput
+CoreOutput
+ExampleOutput
 TestsOutput
+UtilitiesOutput
