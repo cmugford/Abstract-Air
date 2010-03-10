@@ -12,6 +12,7 @@ namespace AbstractAir.Web.Portal
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.IgnoreRoute("elmah.axd");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -25,7 +26,7 @@ namespace AbstractAir.Web.Portal
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
 
             // Used for testing routes
-            RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
 
         protected void Application_Start()
