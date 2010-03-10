@@ -2,6 +2,8 @@
 using System.Web.Routing;
 using MvcContrib.UI.InputBuilder;
 using StructureMap;
+using MvcContrib.StructureMap;
+using MvcContrib.ControllerFactories;
 
 namespace AbstractAir.Web.Portal
 {
@@ -23,10 +25,12 @@ namespace AbstractAir.Web.Portal
 
             ObjectFactory.Initialize(x => x.AddRegistry(new CoreRegistry()));
 
-            ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
+            ControllerBuilder.Current.SetControllerFactory(
+                new IoCControllerFactory(
+                    new StructureMapDependencyResolver()));
 
             // Used for testing routes
-            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+            //MvcContrib.Routing.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
 
         protected void Application_Start()

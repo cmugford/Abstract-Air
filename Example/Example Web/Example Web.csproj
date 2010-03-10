@@ -33,9 +33,17 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=1.0.0.155, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="MvcContrib, Version=2.0.34.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\MvcContrib\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -116,14 +124,16 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>RoboCopy "$(SolutionDir)ExampleOutput\ExampleWeb" "$(SolutionDir)Web\Web Portal\bin" *.* /NP
-RoboCopy "$(SolutionDir)ExampleOutput\ExampleWeb" "$(SolutionDir)WebOutput\bin" *.* /NP
-IF ERRORLEVEL 1 EXIT /B 0
-IF ERRORLEVEL 2 EXIT /B 0
-IF ERRORLEVEL 3 EXIT /B 0
-IF ERRORLEVEL 4 EXIT /B 0
-IF ERRORLEVEL 5 EXIT /B 0
-IF ERRORLEVEL 6 EXIT /B 0
-IF ERRORLEVEL 7 EXIT /B 0</PostBuildEvent>
+    <PostBuildEvent>
+      RoboCopy "$(SolutionDir)ExampleOutput\ExampleWeb" "$(SolutionDir)Web\Web Portal\bin" *.* /NP
+      RoboCopy "$(SolutionDir)ExampleOutput\ExampleWeb" "$(SolutionDir)WebOutput\bin" *.* /NP
+      IF ERRORLEVEL 1 EXIT /B 0
+      IF ERRORLEVEL 2 EXIT /B 0
+      IF ERRORLEVEL 3 EXIT /B 0
+      IF ERRORLEVEL 4 EXIT /B 0
+      IF ERRORLEVEL 5 EXIT /B 0
+      IF ERRORLEVEL 6 EXIT /B 0
+      IF ERRORLEVEL 7 EXIT /B 0
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
