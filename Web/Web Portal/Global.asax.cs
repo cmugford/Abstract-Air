@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
+using MvcContrib.UI.InputBuilder;
 using StructureMap;
 
 namespace AbstractAir.Web.Portal
@@ -28,7 +25,7 @@ namespace AbstractAir.Web.Portal
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
 
             // Used for testing routes
-            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+            RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
 
         protected void Application_Start()
@@ -36,6 +33,7 @@ namespace AbstractAir.Web.Portal
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+            InputBuilder.BootStrap();
         }
     }
 }

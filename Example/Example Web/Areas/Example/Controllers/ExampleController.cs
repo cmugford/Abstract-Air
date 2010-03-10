@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Example_Web.Areas.Example.Controllers
+namespace AbstractAir.Example.Web.Areas.Example.Controllers
 {
     public class ExampleController : Controller
     {

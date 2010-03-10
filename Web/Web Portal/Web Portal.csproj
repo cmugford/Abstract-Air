@@ -12,14 +12,14 @@
     <AssemblyName>AbstractAir.Web.Portal</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Abstract Air.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\bin\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,6 +48,10 @@
     <Reference Include="Elmah, Version=1.0.10617.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib, Version=2.0.34.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\MvcContrib\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="RouteDebug, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -171,7 +175,14 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>RoboCopy "$(SolutionDir)\Web\Web Portal\bin" "$(SolutionDir)\WebOutput\bin" *.* /S /PURGE /NP
+RoboCopy "$(SolutionDir)\Web\Web Portal" "$(SolutionDir)\WebOutput" *.ascx *.aspx *.css *.jpg *.png *.js /S /PURGE /NP
+IF ERRORLEVEL 1 EXIT /B 0
+IF ERRORLEVEL 2 EXIT /B 0
+IF ERRORLEVEL 3 EXIT /B 0
+IF ERRORLEVEL 4 EXIT /B 0
+IF ERRORLEVEL 5 EXIT /B 0
+IF ERRORLEVEL 6 EXIT /B 0
+IF ERRORLEVEL 7 EXIT /B 0</PostBuildEvent>
   </PropertyGroup>
 </Project>

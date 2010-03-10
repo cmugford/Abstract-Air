@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using MvcContrib.PortableAreas;
 
-namespace Example_Web.Areas.Example
+namespace AbstractAir.Example.Web.Areas.Example
 {
     public class ExampleAreaRegistration : PortableAreaRegistration
     {
@@ -20,6 +20,8 @@ namespace Example_Web.Areas.Example
                 "Example/{controller}/{action}/{id}",
                 new { action = "Index", id = "" }
             );
+
+            RegisterTheViewsInTheEmbeddedViewEngine(GetType());
         }
     }
 }

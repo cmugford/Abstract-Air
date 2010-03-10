@@ -8,8 +8,8 @@
     <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Example_Web</RootNamespace>
-    <AssemblyName>Example Web</AssemblyName>
+    <RootNamespace>AbstractAir.Example.Web</RootNamespace>
+    <AssemblyName>AbstractAir.Example.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
   </PropertyGroup>
@@ -67,12 +67,20 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\DefaultGlobalAssemblyInfo.cs">
+      <Link>Properties\DefaultGlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Areas\Example\Controllers\ExampleController.cs" />
     <Compile Include="Areas\Example\ExampleAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Example\Views\Example\Index.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Abstract Air.snk">
+      <Link>Abstract Air.snk</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -108,7 +116,14 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>RoboCopy "$(SolutionDir)ExampleOutput\ExampleWeb" "$(SolutionDir)Web\Web Portal\bin" *.* /NP
+RoboCopy "$(SolutionDir)ExampleOutput\ExampleWeb" "$(SolutionDir)WebOutput\bin" *.* /NP
+IF ERRORLEVEL 1 EXIT /B 0
+IF ERRORLEVEL 2 EXIT /B 0
+IF ERRORLEVEL 3 EXIT /B 0
+IF ERRORLEVEL 4 EXIT /B 0
+IF ERRORLEVEL 5 EXIT /B 0
+IF ERRORLEVEL 6 EXIT /B 0
+IF ERRORLEVEL 7 EXIT /B 0</PostBuildEvent>
   </PropertyGroup>
 </Project>
