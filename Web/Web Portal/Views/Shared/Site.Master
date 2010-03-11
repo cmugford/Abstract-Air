@@ -21,9 +21,24 @@
             <div id="menucontainer">
                 <ul id="menu">
                     <li>
-                        <%= Html.ActionLink("Home", "Index", "Home")%></li>
+                        <%= Html.ActionLink("Home", "Index", "Home", new { area = "" },null)%></li>
+                    <%
+                        foreach (var route in RouteTable.Routes.Where(r => r is Route).Cast<Route>())
+                        {
+                            var dataTokens = route.DataTokens;
+                            var defaults = route.Defaults;
+                            if (dataTokens != null && dataTokens["area"] != null && defaults != null && defaults["controller"] != null && defaults["action"] != null)
+                            {
+                    %>
                     <li>
-                        <%= Html.ActionLink("About", "About", "Home")%></li>
+                        <%= Html.ActionLink(dataTokens["area"].ToString(), defaults["action"].ToString(), defaults["controller"].ToString(), new { area = dataTokens["area"].ToString() }, null)%>
+                    </li>
+                    <%
+                        }
+                        }
+                    %>
+                    <li>
+                        <%= Html.ActionLink("About", "About", "Home", new { area = "" },null)%></li>
                 </ul>
             </div>
         </div>
