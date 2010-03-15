@@ -17,8 +17,8 @@ namespace AbstractAir.Example.Web.Areas.Example
         {
             context.MapRoute(
                 "Example_default",
-                "Example/{controller}/{action}/{id}",
-                new { action = "Index", id = "" }
+                "Example/{controller}/{action}",
+                new { controller = "Example", action = "Index" }
             );
 
             RegisterTheViewsInTheEmbeddedViewEngine(GetType());
