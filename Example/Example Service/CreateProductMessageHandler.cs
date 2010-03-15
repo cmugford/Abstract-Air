@@ -10,25 +10,17 @@ namespace AbstractAir.Examples.ExampleService
 {
 	public class CreateProductMessageHandler : IHandleMessages<ICreateProductMessage>
 	{
-		private readonly IPersistenceFactory _persistenceFactory;
-
-		public CreateProductMessageHandler(IPersistenceFactory persistenceFactory)
-		{
-			_persistenceFactory = ArgumentValidation.IsNotNull(persistenceFactory, "persistenceFactory");
-		}
+		public IPersistenceFacade PersistenceFacade { get; set; }
 
 		public void Handle(ICreateProductMessage message)
 		{
 			ArgumentValidation.IsNotNull(message, "message");
 
-			using (var persistenceScope = _persistenceFactory.CreateScope())
-			{
-				var createProduct = persistenceScope.CreateNew<ICreateProduct>();
+			var createProduct = PersistenceFacade.CreateNew<ICreateProduct>();
 
-				createProduct.AssignCoreDetails(message.Name, message.Category);
+			createProduct.AssignCoreDetails(message.Name, message.Category);
 
-				persistenceScope.Commit();
-			}
+			PersistenceFacade.Save(createProduct);
 		}
 	}
 }

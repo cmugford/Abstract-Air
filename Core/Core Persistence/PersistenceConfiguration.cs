@@ -3,7 +3,7 @@ using System.Configuration;
 
 namespace AbstractAir.Persistence
 {
-	internal class PersistenceConfiguration : ConfigurationSection, IPersistenceConfiguration
+	public class PersistenceConfiguration : ConfigurationSection, IPersistenceConfiguration
 	{
 		private const string ConnectionStringKey = "connectionString";
 

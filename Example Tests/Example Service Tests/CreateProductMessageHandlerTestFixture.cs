@@ -16,8 +16,7 @@ namespace AbstractAir.Examples.ExampleService.Tests
 		private const string TestName = "Product Name";
 		private const string TestCategory = "Product Category";
 
-		private IPersistenceFactory _persistenceFactory;
-		private IPersistenceScope _persistenceScope;
+		private IPersistenceFacade _persistenceFacade;
 		private CreateProductMessageHandler _createProductMessageHandler;
 		private ICreateProductMessage _createProductMessage;
 		private ICreateProduct _createProduct;
@@ -25,25 +24,23 @@ namespace AbstractAir.Examples.ExampleService.Tests
 		[SetUp]
 		public void Setup()
 		{
-			_persistenceFactory = MockRepository.GenerateStub<IPersistenceFactory>();
-			_persistenceScope = MockRepository.GenerateStub<IPersistenceScope>();
+			_persistenceFacade = MockRepository.GenerateStub<IPersistenceFacade>();
 			_createProductMessage = MockRepository.GenerateStub<ICreateProductMessage>();
 			_createProduct = MockRepository.GenerateStub<ICreateProduct>();
 
-			_persistenceFactory.Stub(factory => factory.CreateScope()).Return(_persistenceScope);
-			_persistenceScope.Stub(scope => scope.CreateNew<ICreateProduct>()).Return(_createProduct);
+			_persistenceFacade.Stub(scope => scope.CreateNew<ICreateProduct>()).Return(_createProduct);
 			_createProductMessage.Name = TestName;
 			_createProductMessage.Category = TestCategory;
 
-			_createProductMessageHandler = new CreateProductMessageHandler(_persistenceFactory);
+			_createProductMessageHandler = new CreateProductMessageHandler { PersistenceFacade = _persistenceFacade };
 		}
 
 		[Test]
-		public void PersistenceScopeCommittedForSuccessfulUpdate()
+		public void SaveCalledOnProductCreated()
 		{
 			_createProductMessageHandler.Handle(_createProductMessage);
 
-			_persistenceScope.AssertWasCalled(scope => scope.Commit());
+			_persistenceFacade.AssertWasCalled(facade => facade.Save(_createProduct));
 		}
 
 		[Test]

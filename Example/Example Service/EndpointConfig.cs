@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
+using AbstractAir.Examples.Domain;
 using AbstractAir.Persistence;
 using AbstractAir.Persistence.Domain;
 
@@ -15,7 +16,22 @@ namespace AbstractAir.Examples.ExampleService
 {
 	public class EndpointConfig : IConfigureThisEndpoint, AsA_Publisher, IWantCustomInitialization
 	{
-		public EndpointConfig()
+		public void Init()
+		{
+			ConfigureStructureMap();
+
+			Configure.With()
+				.StructureMapBuilder()
+				.XmlSerializer();
+				//.MsmqTransport()
+				//    .IsTransactional(true)
+				//    .PurgeOnStartup(false)
+				//.UnicastBus()
+				//    .ImpersonateSender(false)
+				//    .LoadMessageHandlers();
+		}
+
+		private static void ConfigureStructureMap()
 		{
 			ObjectFactory.Configure(configure =>
 				{
@@ -25,20 +41,9 @@ namespace AbstractAir.Examples.ExampleService
 					configure.For<IPersistenceConfigurator>().Use<PersistenceConfigurator<MsSql2008Dialect, SqlClientDriver>>();
 					configure.For<IPersistenceConfiguration>().Use((IPersistenceConfiguration)ConfigurationManager.GetSection("persistenceConfiguration"));
 				});
-		}
 
-		public void Init()
-		{
-			Configure.With()
-				.StructureMapBuilder()
-				.XmlSerializer()
-					.MsmqTransport()
-					.IsTransactional(true)
-				.PurgeOnStartup(false)
-				.UnicastBus()
-					.ImpersonateSender(false)
-					.LoadMessageHandlers()
-				.CreateBus();
+			ObjectFactory.GetInstance<IPersistenceConfigurator>().ConfigurePersistence(new[] { typeof(Product).Assembly });
+			ObjectFactory.GetInstance<ICreationStrategyRegistrar>().Register();
 		}
 	}
 }

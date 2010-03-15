@@ -1,5 +1,7 @@
 ﻿using System;
 
+using NServiceBus;
+
 using StructureMap.Configuration.DSL;
 
 namespace AbstractAir.Persistence.Domain
@@ -12,11 +14,13 @@ namespace AbstractAir.Persistence.Domain
 			Scan(scan =>
 				{
 					scan.TheCallingAssembly();
-					scan.ExcludeType<PersistenceScope>();
 					scan.WithDefaultConventions();
 				});
 
+			For<ISessionContextStrategy>().Use<CallContextSessionContextStrategy>();
+			FillAllPropertiesOfType<IPersistenceFacade>();
 			For(typeof(ISavingStrategy<>)).Use(typeof(DefaultSavingStrategy<>));
+			For<IMessageModule>().Use<PersistenceMessageModule>();
 		}
 	}
 }

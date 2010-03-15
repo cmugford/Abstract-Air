@@ -8,7 +8,7 @@ using Rhino.Mocks;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	public class PersistenceScopeCreateNewTestFixture : PersistenceScopeTestFixtureBase
+	public class PersistenceFacadeCreateNewTestFixture : PersistenceFacadeTestFixtureBase
 	{
 		[SetUp]
 		public override void Setup()
@@ -27,7 +27,7 @@ namespace AbstractAir.Persistence.Domain.Tests
 			Container.Stub(container => container.GetInstance<ICreationStrategy<ITestObject>>())
 				.Return(creationStrategy);
 
-			var result = PersistenceScope.CreateNew<ITestObject>();
+			var result = PersistenceFacade.CreateNew<ITestObject>();
 
 			Assert.AreSame(testObject, result);
 		}

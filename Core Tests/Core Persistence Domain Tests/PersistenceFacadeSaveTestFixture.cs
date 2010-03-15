@@ -8,7 +8,7 @@ using Rhino.Mocks;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	public class PersistenceScopeSaveTestFixture : PersistenceScopeTestFixtureBase
+	public class PersistenceFacadeSaveTestFixture : PersistenceFacadeTestFixtureBase
 	{
 		[SetUp]
 		public override void Setup()
@@ -24,7 +24,7 @@ namespace AbstractAir.Persistence.Domain.Tests
 
 			Container.Stub(container => container.GetInstance<ISavingStrategy<TestObject>>()).Return(savingStrategy);
 
-			PersistenceScope.Save(instance);
+			PersistenceFacade.Save(instance);
 
 			savingStrategy.AssertWasCalled(strategy => strategy.Save(instance, Session));
 		}

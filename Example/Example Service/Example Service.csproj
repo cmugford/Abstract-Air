@@ -84,6 +84,7 @@
     <Compile Include="CreateProductMessageHandler.cs" />
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Abstract Air.snk">

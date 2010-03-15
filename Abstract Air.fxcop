@@ -152,10 +152,15 @@
             <Accessors>
              <Accessor Name="#set_ConnectionString(System.String)">
               <Messages>
-               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2010-03-07 06:00:52Z">
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2010-03-07 06:00:52Z">
                 <Issue>
                  <Item>'PersistenceConfiguration.ConnectionString.set(string)'</Item>
                 </Issue>
+                <Notes>
+                 <User Name="Colin Scott">
+                  <Note Id="3" />
+                 </User>
+                </Notes>
                </Message>
               </Messages>
              </Accessor>
@@ -172,13 +177,6 @@
    <Target Name="$(ProjectDir)/CoreOutput/AbstractAir.Persistence.Domain.dll">
     <Modules>
      <Module Name="abstractair.persistence.domain.dll">
-      <Messages>
-       <Message TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824" Created="2010-03-07 06:00:52Z">
-        <Issue>
-         <Item>'AbstractAir.Persistence.Domain.dll'</Item>
-        </Issue>
-       </Message>
-      </Messages>
       <Namespaces>
        <Namespace Name="AbstractAir.Persistence.Domain">
         <Types>
@@ -195,34 +193,6 @@
             </Notes>
            </Message>
           </Messages>
-         </Type>
-         <Type Name="IPersistenceScope">
-          <Members>
-           <Member Name="#CreateNew`1()">
-            <Messages>
-             <Message TypeName="GenericMethodsShouldProvideTypeParameter" Category="Microsoft.Design" CheckId="CA1004" Created="2010-03-07 06:00:52Z">
-              <Issue>
-               <Item>'IPersistenceScope.CreateNew&lt;TEntity&gt;()'</Item>
-               <Item>'TEntity'</Item>
-              </Issue>
-             </Message>
-            </Messages>
-           </Member>
-          </Members>
-         </Type>
-         <Type Name="PersistenceScope">
-          <Members>
-           <Member Name="#CreateNew`1()">
-            <Messages>
-             <Message TypeName="GenericMethodsShouldProvideTypeParameter" Category="Microsoft.Design" CheckId="CA1004" Created="2010-03-07 06:00:52Z">
-              <Issue>
-               <Item>'PersistenceScope.CreateNew&lt;TEntity&gt;()'</Item>
-               <Item>'TEntity'</Item>
-              </Issue>
-             </Message>
-            </Messages>
-           </Member>
-          </Members>
          </Type>
         </Types>
        </Namespace>
@@ -282,54 +252,13 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/ExampleOutput/ExampleClient/ExampleClient.exe">
-    <Modules>
-     <Module Name="exampleclient.exe">
-      <Namespaces>
-       <Namespace Name="AbstractAir.Examples.ExampleClient">
-        <Types>
-         <Type Name="Program">
-          <Messages>
-           <Message TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053" Created="2010-03-07 06:00:52Z">
-            <Issue>
-             <Item>'Program'</Item>
-            </Issue>
-           </Message>
-          </Messages>
-         </Type>
-        </Types>
-       </Namespace>
-      </Namespaces>
-     </Module>
-    </Modules>
-   </Target>
-   <Target Name="$(ProjectDir)/UtilitiesOutput/DatabaseGenerator.exe">
-    <Modules>
-     <Module Name="databasegenerator.exe">
-      <Namespaces>
-       <Namespace Name="AbstractAir.Utilities.DatabaseGenerator">
-        <Types>
-         <Type Name="Program">
-          <Messages>
-           <Message TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053" Created="2010-03-07 06:00:52Z">
-            <Issue>
-             <Item>'Program'</Item>
-            </Issue>
-           </Message>
-          </Messages>
-         </Type>
-        </Types>
-       </Namespace>
-      </Namespaces>
-     </Module>
-    </Modules>
-   </Target>
   </Targets>
   <Notes>
    <User Name="Colin Scott">
     <Note Id="0" Modified="2010-03-07 06:09:41Z">Wrong</Note>
     <Note Id="1" Modified="2010-03-07 06:10:46Z">Marker interface</Note>
     <Note Id="2" Modified="2010-03-07 06:10:59Z">Called dynamically</Note>
+    <Note Id="3" Modified="2010-03-07 06:12:32Z">Configuration code</Note>
    </User>
   </Notes>
   <Rules>
@@ -341,15 +270,6 @@
    </Rule>
    <Rule TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702">
     <Resolution Name="MemberShouldBeCompoundWord">The discrete term '{0}' in member name {1} should be expressed as a compound word, '{2}'.</Resolution>
-   </Rule>
-   <Rule TypeName="GenericMethodsShouldProvideTypeParameter" Category="Microsoft.Design" CheckId="CA1004">
-    <Resolution Name="Default">Consider a design where {0} doesn't require explicit type parameter {1} in any call to it.</Resolution>
-   </Rule>
-   <Rule TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824">
-    <Resolution Name="Default">Because assembly {0} contains a ResX-based resource file, mark it with the NeutralResourcesLanguage attribute, specifying the language of the resources within the assembly. This could improve lookup performance the first time a resource is retrieved.</Resolution>
-   </Rule>
-   <Rule TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053">
-    <Resolution Name="Default">Remove the public constructors from {0}.</Resolution>
    </Rule>
   </Rules>
  </FxCopReport>

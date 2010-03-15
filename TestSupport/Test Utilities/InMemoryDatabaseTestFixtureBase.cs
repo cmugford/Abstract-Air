@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-using AbstractAir.Persistence.Domain;
-
 using MbUnit.Framework;
 
 using NHibernate;
@@ -38,11 +36,6 @@ namespace AbstractAir.TestUtilities
 			assemblies.Apply(assembly => Configuration.AddAssembly(assembly));
 
 			SessionFactory = Configuration.BuildSessionFactory();
-		}
-
-		public IPersistenceScope CreatePersistenceScope()
-		{
-			return new PersistenceScope(Session, Container);
 		}
 
 		[SetUp]

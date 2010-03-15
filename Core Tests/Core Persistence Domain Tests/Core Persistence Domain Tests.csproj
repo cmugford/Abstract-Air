@@ -12,12 +12,14 @@
     <AssemblyName>AbstractAir.Persistence.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Abstract Air.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\TestsOutput\</OutputPath>
+    <OutputPath>..\..\CoreTestsOutput\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,7 +31,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\TestsOutput\</OutputPath>
+    <OutputPath>..\..\CoreTestsOutput\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,6 +50,10 @@
     <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -78,15 +84,14 @@
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CallContextSessionContextStrategyTestFixture.cs" />
     <Compile Include="CreationStrategyRegistrarTestFixture.cs" />
     <Compile Include="DefaultCreationStrategyTestFixture.cs" />
     <Compile Include="DefaultSavingStrategyTestFixture.cs" />
-    <Compile Include="PersistenceFactoryTestFixture.cs" />
-    <Compile Include="PersistenceScopeCommitAndDisposeTestFixture.cs" />
-    <Compile Include="PersistenceScopeCreateNewTestFixture.cs" />
-    <Compile Include="PersistenceScopeCriteriaCreationTestFixture.cs" />
-    <Compile Include="PersistenceScopeSaveTestFixture.cs" />
-    <Compile Include="PersistenceScopeTestFixtureBase.cs" />
+    <Compile Include="PersistenceFacadeCreateNewTestFixture.cs" />
+    <Compile Include="PersistenceFacadeSaveTestFixture.cs" />
+    <Compile Include="PersistenceFacadeTestFixtureBase.cs" />
+    <Compile Include="PersistenceMessageModuleTestFixture.cs" />
     <Compile Include="PreExistingCreationStrategyRegistrationTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,6 +108,11 @@
       <Project>{FAFF7316-E669-4D8A-8D38-3885A3CBF6C8}</Project>
       <Name>Test Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Abstract Air.snk">
+      <Link>Abstract Air.snk</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

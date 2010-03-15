@@ -1,6 +1,7 @@
 GlobalAssemblyInfo.cs
 obj
 bin
+Bin
 deploy
 deploy/*
 _ReSharper.*
@@ -11,7 +12,10 @@ _ReSharper.*
 *.cache
 ~$*
 *.swp
-CoreOutput
-ExampleOutput
-TestsOutput
-UtilitiesOutput
+CoreOutput/
+CoreTestsOutput/
+ExampleOutput/
+ExampleTestsOutput/
+TestSupportOutput/
+UtilitiesOutput/
+WebOutput/
