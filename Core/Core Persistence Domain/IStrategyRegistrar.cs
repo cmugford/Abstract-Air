@@ -2,7 +2,7 @@ using System;
 
 namespace AbstractAir.Persistence.Domain
 {
-	public interface ICreationStrategyRegistrar
+	public interface IStrategyRegistrar
 	{
 		void Register();
 	}

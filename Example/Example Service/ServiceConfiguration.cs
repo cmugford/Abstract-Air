@@ -28,7 +28,7 @@ namespace AbstractAir.Examples.ExampleService
 			});
 
 			ObjectFactory.GetInstance<IPersistenceConfigurator>().ConfigurePersistence(new[] { typeof(Product).Assembly });
-			ObjectFactory.GetInstance<ICreationStrategyRegistrar>().Register();
+			ObjectFactory.GetInstance<IStrategyRegistrar>().Register();
 		}
 
 		public void Stop()

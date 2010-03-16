@@ -4,6 +4,9 @@ namespace AbstractAir.Persistence.Domain
 {
 	public interface IPersistenceFacade
 	{
+		TEntity FindById<TEntity>(object entityId)
+			where TEntity : class, IEntity;
+
 		TEntity CreateNew<TEntity>()
 			where TEntity : class, IEntity;
 

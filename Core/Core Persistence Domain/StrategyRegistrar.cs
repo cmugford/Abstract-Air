@@ -12,11 +12,11 @@ using StructureMap;
 
 namespace AbstractAir.Persistence.Domain
 {
-	public class CreationStrategyRegistrar : ICreationStrategyRegistrar
+	public class StrategyRegistrar : IStrategyRegistrar
 	{
 		private readonly ISessionFactory _sessionFactory;
 
-		public CreationStrategyRegistrar(ISessionFactory sessionFactory)
+		public StrategyRegistrar(ISessionFactory sessionFactory)
 		{
 			_sessionFactory = ArgumentValidation.IsNotNull(sessionFactory, "sessionFactory");
 		}
@@ -26,6 +26,8 @@ namespace AbstractAir.Persistence.Domain
 			_sessionFactory.GetAllClassMetadata()
 				.Values
 				.Apply(ProcessClassMetadata);
+
+			ObjectFactory.Configure(configure => configure.For(typeof(IRepository<>)).Use(typeof(Repository<>)));
 		}
 
 		private static void ProcessClassMetadata(IClassMetadata classMetadata)
@@ -38,7 +40,8 @@ namespace AbstractAir.Persistence.Domain
 
 			RegisterDefaultStrategies(mappedClass);
 
-			ConfigureRoles(mappedClass);
+			ConfigureRoles(mappedClass, typeof(IRepository<>), typeof(RepositoryWrapper<,>));
+			ConfigureRoles(mappedClass, typeof(ICreationStrategy<>), typeof(DefaultCreationStrategy<,>));
 		}
 
 		private static void RegisterDefaultStrategies(Type mappedClass)
@@ -47,14 +50,14 @@ namespace AbstractAir.Persistence.Domain
 				.Use(typeof(DefaultCreationStrategy<,>).MakeGenericType(new[] { mappedClass, mappedClass })));
 		}
 
-		private static void ConfigureRoles(Type mappedClass)
+		private static void ConfigureRoles(Type mappedClass, Type requestedType, Type defaultType)
 		{
-			var roles = RegisterRoleInterfaces(mappedClass, typeof(ICreationStrategy<>));
+			var roles = RegisterRoleInterfaces(mappedClass, requestedType);
 
 			ObjectFactory.Configure(configure =>
 				roles.Keys.Apply(key =>
-					configure.For(typeof(ICreationStrategy<>).MakeGenericType(key))
-						.Use(typeof(DefaultCreationStrategy<,>).MakeGenericType(new[] { key, roles[key] }))));
+					configure.For(requestedType.MakeGenericType(key))
+						.Use(defaultType.MakeGenericType(new[] { key, roles[key] }))));
 		}
 
 		private static IDictionary<Type, Type> RegisterRoleInterfaces(Type mappedClass, Type requestedType)

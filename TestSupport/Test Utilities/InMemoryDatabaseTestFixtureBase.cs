@@ -11,10 +11,6 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
 
-using Rhino.Mocks;
-
-using StructureMap;
-
 namespace AbstractAir.TestUtilities
 {
 	public abstract class InMemoryDatabaseTestFixtureBase : IDisposable
@@ -22,7 +18,6 @@ namespace AbstractAir.TestUtilities
 		protected Configuration Configuration { get; private set; }
 		protected ISessionFactory SessionFactory { get; private set; }
 		protected ISession Session { get; private set; }
-		protected IContainer Container { get; private set; }
 
 		protected InMemoryDatabaseTestFixtureBase(IEnumerable<Assembly> assemblies)
 		{
@@ -42,7 +37,6 @@ namespace AbstractAir.TestUtilities
 		public void Setup()
 		{
 			Session = SessionFactory.OpenSession();
-			Container = MockRepository.GenerateStub<IContainer>();
 
 			new SchemaExport(Configuration).Execute(true, true, false, Session.Connection, Console.Out);
 

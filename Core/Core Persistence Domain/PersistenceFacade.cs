@@ -22,6 +22,11 @@ namespace AbstractAir.Persistence.Domain
 			get { return _container; }
 		}
 
+		public TEntity FindById<TEntity>(object entityId) where TEntity : class, IEntity
+		{
+			return _container.GetInstance<IFetchingStrategy<TEntity>>().Fetch(entityId);
+		}
+
 		public TEntity CreateNew<TEntity>()
 			where TEntity : class, IEntity
 		{

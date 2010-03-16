@@ -68,15 +68,17 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="CallContextSessionContextStrategy.cs" />
-    <Compile Include="CreationStrategyRegistrar.cs" />
     <Compile Include="DefaultCreationStrategy.cs" />
+    <Compile Include="DefaultFetchingStrategy.cs" />
     <Compile Include="DefaultSavingStrategy.cs" />
     <Compile Include="ICreationStrategy.cs" />
-    <Compile Include="ICreationStrategyRegistrar.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IFetchingStrategy.cs" />
     <Compile Include="IPersistenceFacade.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="ISavingStrategy.cs" />
     <Compile Include="ISessionContextStrategy.cs" />
+    <Compile Include="IStrategyRegistrar.cs" />
     <Compile Include="IVersionedEntity.cs" />
     <Compile Include="PersistenceDomainRegistry.cs" />
     <Compile Include="PersistenceFacade.cs" />
@@ -87,6 +89,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repository.cs" />
+    <Compile Include="RepositoryWrapper.cs" />
+    <Compile Include="StrategyRegistrar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Abstract Air.snk">

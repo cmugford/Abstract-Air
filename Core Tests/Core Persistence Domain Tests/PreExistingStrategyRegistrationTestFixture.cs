@@ -11,19 +11,21 @@ using StructureMap;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
+	[Row(typeof(IRepository<ITestObject>), typeof(RepositoryWrapper<ITestObject, TestObject>))]
 	[Row(typeof(ICreationStrategy<ITestObject>), typeof(DefaultCreationStrategy<ITestObject, TestObject>))]
 	[Row(typeof(ICreationStrategy<IVersionedTestObject>), typeof(DefaultCreationStrategy<IVersionedTestObject, VersionedTestObject>))]
-	public class PreExistingCreationStrategyRegistrationTestFixture<TRequestedClass, TNotExpectedClass>
+	public class PreExistingStrategyRegistrationTestFixture<TRequestedClass, TNotExpectedClass>
 		: InMemoryDatabaseTestFixtureBase
 		where TRequestedClass : class
 	{
-		public PreExistingCreationStrategyRegistrationTestFixture()
+		public PreExistingStrategyRegistrationTestFixture()
 			: base(new[] {typeof(TestObject).Assembly})
 		{
 		}
 
 		public override void SetupImplementation()
 		{
+			ObjectFactory.Initialize(initialise => initialise.For<ISessionContextStrategy>().Use(MockRepository.GenerateStub<ISessionContextStrategy>()));
 		}
 
 		public override void TearDownImplementation()
@@ -35,7 +37,7 @@ namespace AbstractAir.Persistence.Domain.Tests
 		{
 			ObjectFactory.Configure(configure => configure.For<TRequestedClass>().Use(MockRepository.GenerateStub<TRequestedClass>()));
 
-			var creationStrategyRegistrar = new CreationStrategyRegistrar(SessionFactory);
+			var creationStrategyRegistrar = new StrategyRegistrar(SessionFactory);
 
 			creationStrategyRegistrar.Register();
 
