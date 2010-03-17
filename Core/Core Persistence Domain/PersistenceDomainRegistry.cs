@@ -21,6 +21,7 @@ namespace AbstractAir.Persistence.Domain
 			FillAllPropertiesOfType<IPersistenceFacade>();
 			For(typeof(ISavingStrategy<>)).Use(typeof(DefaultSavingStrategy<>));
 			For<IMessageModule>().Use<PersistenceMessageModule>();
+			For(typeof(IFetchingStrategy<>)).Use(typeof(DefaultFetchingStrategy<>));
 		}
 	}
 }

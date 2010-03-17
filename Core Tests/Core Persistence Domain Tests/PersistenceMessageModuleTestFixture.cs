@@ -8,7 +8,6 @@ using Rhino.Mocks;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	[TestFixture]
 	public class PersistenceMessageModuleTestFixture
 	{
 		private ISessionContextStrategy _sessionContextStrategy;

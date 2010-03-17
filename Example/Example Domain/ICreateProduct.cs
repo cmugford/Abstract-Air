@@ -6,6 +6,6 @@ namespace AbstractAir.Examples.Domain
 {
 	public interface ICreateProduct : IVersionedEntity
 	{
-		void AssignCoreDetails(string productName, string productCategory);
+		void AssignCoreDetails(Guid productId, string productName, string productCategory);
 	}
 }

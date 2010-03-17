@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Example Domain")]
@@ -10,3 +11,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("3c5c4bd1-9297-475b-95a8-934ff742d571")]
 
 [assembly: CLSCompliant(true)]
+
+[assembly: NeutralResourcesLanguage("en")]

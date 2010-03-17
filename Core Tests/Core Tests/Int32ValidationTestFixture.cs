@@ -6,7 +6,6 @@ using Rhino.Mocks;
 
 namespace AbstractAir.Tests
 {
-	[TestFixture]
 	public class Int32ValidationTestFixture
 	{
 		[Test]

@@ -10,7 +10,6 @@ using Rhino.Mocks;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	[TestFixture]
 	public class RepositoryTestFixture
 	{
 		private IRepository<TestObject> _repository;

@@ -12,9 +12,9 @@ namespace AbstractAir.Persistence.Domain
 			_baseRepository = ArgumentValidation.IsNotNull(baseRepository, "baseRepository");
 		}
 
-		public TEntity Fetch(object identifier)
+		public TEntity Fetch(object entityId)
 		{
-			return _baseRepository.Get(identifier);
+			return _baseRepository.Get(entityId);
 		}
 	}
 }

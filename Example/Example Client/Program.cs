@@ -20,11 +20,20 @@ namespace AbstractAir.Examples.ExampleClient
 			var count = 0;
 			while (Console.ReadLine() != "q")
 			{
+				var productId = Guid.NewGuid();
 				var localCount = count++;
+
 				bus.Send<ICreateProductMessage>(message =>
 					{
+						message.ProductId = productId;
 						message.Name = string.Format(CultureInfo.CurrentCulture, "Product {0}", localCount);
 						message.Category = string.Format(CultureInfo.CurrentCulture, "Product Category {0}", localCount);
+					});
+
+				bus.Send<IRenameProductMessage>(message =>
+					{
+						message.ProductId = productId;
+						message.Name = string.Format(CultureInfo.CurrentCulture, "Rename Product {0}", localCount);
 					});
 			}
 		}

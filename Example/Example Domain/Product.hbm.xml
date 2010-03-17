@@ -4,7 +4,7 @@
 		namespace="AbstractAir.Examples.Domain">
 	<class name="Product" table="Product">
 		<id name="Id" column="ProductId">
-			<generator class="guid.comb" />
+			<generator class="assigned" />
 		</id>
 		<version name="Version" column="Version"/>
 		<property name="Name" length="256" not-null="true"/>

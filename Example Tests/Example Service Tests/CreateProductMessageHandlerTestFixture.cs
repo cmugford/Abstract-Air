@@ -10,12 +10,12 @@ using Rhino.Mocks;
 
 namespace AbstractAir.Examples.ExampleService.Tests
 {
-	[TestFixture]
 	public class CreateProductMessageHandlerTestFixture
 	{
 		private const string TestName = "Product Name";
 		private const string TestCategory = "Product Category";
 
+		private Guid _productId;
 		private IPersistenceFacade _persistenceFacade;
 		private CreateProductMessageHandler _createProductMessageHandler;
 		private ICreateProductMessage _createProductMessage;
@@ -28,7 +28,10 @@ namespace AbstractAir.Examples.ExampleService.Tests
 			_createProductMessage = MockRepository.GenerateStub<ICreateProductMessage>();
 			_createProduct = MockRepository.GenerateStub<ICreateProduct>();
 
+			_productId = Guid.NewGuid();
+
 			_persistenceFacade.Stub(scope => scope.CreateNew<ICreateProduct>()).Return(_createProduct);
+			_createProductMessage.ProductId = _productId;
 			_createProductMessage.Name = TestName;
 			_createProductMessage.Category = TestCategory;
 
@@ -48,7 +51,7 @@ namespace AbstractAir.Examples.ExampleService.Tests
 		{
 			_createProductMessageHandler.Handle(_createProductMessage);
 
-			_createProduct.AssertWasCalled(createProduct => createProduct.AssignCoreDetails(TestName, TestCategory));
+			_createProduct.AssertWasCalled(createProduct => createProduct.AssignCoreDetails(_productId, TestName, TestCategory));
 		}
 	}
 }
