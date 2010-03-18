@@ -2,6 +2,7 @@
 using System.Configuration;
 
 using AbstractAir.Examples.Domain;
+using AbstractAir.Examples.DomainEventHandlers;
 using AbstractAir.Persistence;
 using AbstractAir.Persistence.Domain;
 
@@ -23,12 +24,6 @@ namespace AbstractAir.Examples.ExampleService
 			Configure.With()
 				.StructureMapBuilder()
 				.XmlSerializer();
-				//.MsmqTransport()
-				//    .IsTransactional(true)
-				//    .PurgeOnStartup(false)
-				//.UnicastBus()
-				//    .ImpersonateSender(false)
-				//    .LoadMessageHandlers();
 		}
 
 		private static void ConfigureStructureMap()
@@ -37,6 +32,7 @@ namespace AbstractAir.Examples.ExampleService
 				{
 					configure.AddRegistry<CoreRegistry>();
 					configure.AddRegistry<PersistenceDomainRegistry>();
+					configure.AddRegistry<EventHandlersRegistry>();
 
 					configure.For<IPersistenceConfigurator>().Use<PersistenceConfigurator<MsSql2008Dialect, SqlClientDriver>>();
 					configure.For<IPersistenceConfiguration>().Use((IPersistenceConfiguration)ConfigurationManager.GetSection("persistenceConfiguration"));
@@ -44,6 +40,8 @@ namespace AbstractAir.Examples.ExampleService
 
 			ObjectFactory.GetInstance<IPersistenceConfigurator>().ConfigurePersistence(new[] { typeof(Product).Assembly });
 			ObjectFactory.GetInstance<IStrategyRegistrar>().Register();
+
+			DomainEvents.Container = ObjectFactory.Container;
 		}
 	}
 }

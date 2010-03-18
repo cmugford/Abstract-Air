@@ -106,6 +106,10 @@
       <Project>{542CE7BC-2839-4A92-A7B6-A3F53B567AF5}</Project>
       <Name>Core %28Core\Core%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Example Domain Event Handlers\Example Domain Event Handlers.csproj">
+      <Project>{3B7E3C22-B753-45AE-9A3E-E5EA0899C1FF}</Project>
+      <Name>Example Domain Event Handlers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example Domain\Example Domain.csproj">
       <Project>{09D7E5C5-399E-419B-A23E-F2EB32AE3410}</Project>
       <Name>Example Domain</Name>

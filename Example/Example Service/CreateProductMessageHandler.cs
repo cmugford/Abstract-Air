@@ -18,7 +18,7 @@ namespace AbstractAir.Examples.ExampleService
 
 			var createProduct = PersistenceFacade.CreateNew<ICreateProduct>();
 
-			createProduct.AssignCoreDetails(message.ProductId, message.Name, message.Category);
+			createProduct.Initialise(message.ProductId, message.Name, message.Category);
 
 			PersistenceFacade.Save(createProduct);
 		}

@@ -28,6 +28,7 @@
   <Target Name="$(ProjectDir)/CoreOutput/AbstractAir.Persistence.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/CoreOutput/AbstractAir.Persistence.Domain.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/ExampleOutput/AbstractAir.Examples.Domain.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/ExampleOutput/AbstractAir.Examples.DomainEventHandlers.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/ExampleOutput/AbstractAir.Examples.InternalMessages.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/ExampleOutput/AbstractAir.Examples.Messages.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/ExampleOutput/ExampleClient/ExampleClient.exe" Analyze="True" AnalyzeAllChildren="True" />
@@ -185,6 +186,38 @@
       <Namespaces>
        <Namespace Name="AbstractAir.Persistence.Domain">
         <Types>
+         <Type Name="DomainEvents">
+          <Members>
+           <Member Name="#Raise`1(!!0)">
+            <Messages>
+             <Message TypeName="UseEventsWhereAppropriate" Category="Microsoft.Design" CheckId="CA1030" Status="Excluded" Created="2010-03-18 16:45:20Z">
+              <Issue>
+               <Item>'DomainEvents.Raise&lt;TEvent&gt;(TEvent)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Colin Scott">
+                <Note Id="11" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="IDomainEvent">
+          <Messages>
+           <Message TypeName="AvoidEmptyInterfaces" Category="Microsoft.Design" CheckId="CA1040" Status="Excluded" Created="2010-03-18 16:45:20Z">
+            <Issue>
+             <Item>'IDomainEvent'</Item>
+            </Issue>
+            <Notes>
+             <User Name="Colin Scott">
+              <Note Id="10" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+         </Type>
          <Type Name="IEntity">
           <Messages>
            <Message TypeName="AvoidEmptyInterfaces" Category="Microsoft.Design" CheckId="CA1040" Status="Excluded" Created="2010-03-07 06:00:52Z">
@@ -269,6 +302,48 @@
             </Accessors>
            </Member>
           </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/ExampleOutput/AbstractAir.Examples.DomainEventHandlers.dll">
+    <Modules>
+     <Module Name="abstractair.examples.domaineventhandlers.dll">
+      <Namespaces>
+       <Namespace Name="AbstractAir.Examples.DomainEventHandlers">
+        <Types>
+         <Type Name="ProductCreatedEventHandler">
+          <Messages>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectSuffix" Category="Microsoft.Naming" CheckId="CA1711" Status="Excluded" Created="2010-03-18 16:45:20Z">
+            <Issue Name="TypeNoAlternate">
+             <Item>'ProductCreatedEventHandler'</Item>
+             <Item>EventHandler</Item>
+            </Issue>
+            <Notes>
+             <User Name="Colin Scott">
+              <Note Id="9" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="ProductRenamedEventHandler">
+          <Messages>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectSuffix" Category="Microsoft.Naming" CheckId="CA1711" Status="Excluded" Created="2010-03-18 16:45:20Z">
+            <Issue Name="TypeNoAlternate">
+             <Item>'ProductRenamedEventHandler'</Item>
+             <Item>EventHandler</Item>
+            </Issue>
+            <Notes>
+             <User Name="Colin Scott">
+              <Note Id="9" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
          </Type>
         </Types>
        </Namespace>
@@ -396,6 +471,9 @@
     <Note Id="6" Modified="2010-03-16 13:38:25Z">ASP.NET MVC method</Note>
     <Note Id="7" Modified="2010-03-16 13:38:43Z">Valid in context</Note>
     <Note Id="8" Modified="2010-03-16 13:38:52Z">MvcContrib is not signed</Note>
+    <Note Id="9" Modified="2010-03-18 16:46:09Z">Classes actually do handle events.</Note>
+    <Note Id="10" Modified="2010-03-18 16:46:17Z">Marker interface</Note>
+    <Note Id="11" Modified="2010-03-18 16:46:50Z">There's more than one kind of event in the world.</Note>
    </User>
   </Notes>
   <Rules>
@@ -414,6 +492,9 @@
    <Rule TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702">
     <Resolution Name="MemberShouldBeCompoundWord">The discrete term '{0}' in member name {1} should be expressed as a compound word, '{2}'.</Resolution>
    </Rule>
+   <Rule TypeName="IdentifiersShouldNotHaveIncorrectSuffix" Category="Microsoft.Naming" CheckId="CA1711">
+    <Resolution Name="TypeNoAlternate">Rename type name {0} so that it does not end in '{1}'.</Resolution>
+   </Rule>
    <Rule TypeName="IdentifiersShouldNotMatchKeywords" Category="Microsoft.Naming" CheckId="CA1716">
     <Resolution Name="Member">Rename virtual/interface member {0} so that it no longer conflicts with the reserved language keyword '{1}'. Using a reserved keyword as the name of a virtual/interface member makes it harder for consumers in other languages to override/implement the member.</Resolution>
    </Rule>
@@ -422,6 +503,9 @@
    </Rule>
    <Rule TypeName="UriParametersShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1054">
     <Resolution Name="Default">Change the type of parameter {0} of method {1} from string to System.Uri, or provide an overload of {1}, that allows {0} to be passed as a System.Uri object.</Resolution>
+   </Rule>
+   <Rule TypeName="UseEventsWhereAppropriate" Category="Microsoft.Design" CheckId="CA1030">
+    <Resolution Name="Default">Consider making {0} an event.</Resolution>
    </Rule>
   </Rules>
  </FxCopReport>

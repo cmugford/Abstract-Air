@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\NServiceBus.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Tools\Rhino Mocks 3.6\Rhino.Mocks.dll</HintPath>
@@ -88,6 +92,9 @@
     <Compile Include="DefaultCreationStrategyTestFixture.cs" />
     <Compile Include="DefaultFetchingStrategyTestFixture.cs" />
     <Compile Include="DefaultSavingStrategyTestFixture.cs" />
+    <Compile Include="DomainEventsTestFixture.cs" />
+    <Compile Include="IAlternateDomainEvent.cs" />
+    <Compile Include="ITestDomainEvent.cs" />
     <Compile Include="PersistenceFacadeCreateNewTestFixture.cs" />
     <Compile Include="PersistenceFacadeFindByIdTestFixture.cs" />
     <Compile Include="PersistenceFacadeSaveTestFixture.cs" />

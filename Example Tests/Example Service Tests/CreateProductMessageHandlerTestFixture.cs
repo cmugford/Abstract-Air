@@ -51,7 +51,7 @@ namespace AbstractAir.Examples.ExampleService.Tests
 		{
 			_createProductMessageHandler.Handle(_createProductMessage);
 
-			_createProduct.AssertWasCalled(createProduct => createProduct.AssignCoreDetails(_productId, TestName, TestCategory));
+			_createProduct.AssertWasCalled(createProduct => createProduct.Initialise(_productId, TestName, TestCategory));
 		}
 	}
 }

@@ -42,6 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\NServiceBus.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Tools\Rhino Mocks 3.6\Rhino.Mocks.dll</HintPath>
@@ -71,7 +75,10 @@
     <Compile Include="DefaultCreationStrategy.cs" />
     <Compile Include="DefaultFetchingStrategy.cs" />
     <Compile Include="DefaultSavingStrategy.cs" />
+    <Compile Include="DomainEvents.cs" />
     <Compile Include="ICreationStrategy.cs" />
+    <Compile Include="IDomainEvent.cs" />
+    <Compile Include="IHandleDomainEvents.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IFetchingStrategy.cs" />
     <Compile Include="IPersistenceFacade.cs" />

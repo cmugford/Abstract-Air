@@ -2,11 +2,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Example Service Tests")]
+[assembly: AssemblyTitle("Example Domain Event Handlers")]
 [assembly: AssemblyDescription("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("e83683e9-c139-4972-a804-fd4827e8226d")]
+[assembly: Guid("cea6796a-6d89-4d6c-bef2-aac60e80556a")]
 
-[assembly: CLSCompliant(false)]
+[assembly: CLSCompliant(true)]

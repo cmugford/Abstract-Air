@@ -1,6 +1,7 @@
 ﻿using System;
 
 using AbstractAir.Examples.Domain.Properties;
+using AbstractAir.Persistence.Domain;
 
 namespace AbstractAir.Examples.Domain
 {
@@ -11,7 +12,7 @@ namespace AbstractAir.Examples.Domain
 		public virtual string Name { get; private set; }
 		public virtual string Category { get; private set; }
 
-		public virtual void AssignCoreDetails(Guid productId, string productName, string productCategory)
+		public virtual void Initialise(Guid productId, string productName, string productCategory)
 		{
 			if (Id != Guid.Empty)
 			{
@@ -21,11 +22,15 @@ namespace AbstractAir.Examples.Domain
 			Id = productId;
 			Name = ArgumentValidation.StringNotNullOrEmpty(productName, "productName");
 			Category = ArgumentValidation.StringNotNullOrEmpty(productCategory, "productCategory");
+
+			DomainEvents.Raise(new ProductCreatedEvent { Product = this });
 		}
 
 		public virtual void Rename(string productName)
 		{
 			Name = ArgumentValidation.StringNotNullOrEmpty(productName, "productName");
+
+			DomainEvents.Raise(new ProductRenamedEvent { Product = this });
 		}
 	}
 }
