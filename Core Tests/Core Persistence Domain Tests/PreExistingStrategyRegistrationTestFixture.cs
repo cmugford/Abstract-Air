@@ -11,7 +11,7 @@ using StructureMap;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	[Row(typeof(IRepository<ITestObject>), typeof(RepositoryWrapper<ITestObject, TestObject>))]
+	[Row(typeof(IRepository<ITestObject>), typeof(Repository<ITestObject, TestObject>))]
 	[Row(typeof(ICreationStrategy<ITestObject>), typeof(DefaultCreationStrategy<ITestObject, TestObject>))]
 	[Row(typeof(ICreationStrategy<IVersionedTestObject>), typeof(DefaultCreationStrategy<IVersionedTestObject, VersionedTestObject>))]
 	public class PreExistingStrategyRegistrationTestFixture<TRequestedClass, TNotExpectedClass>

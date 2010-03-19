@@ -11,12 +11,12 @@ using StructureMap;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	[Row(typeof(Repository<TestObject>), typeof(IRepository<TestObject>))]
-	[Row(typeof(RepositoryWrapper<ITestObject, TestObject>), typeof(IRepository<ITestObject>))]
-	[Row(typeof(RepositoryWrapper<IFirstTestInterface, MultiInterfaceTestObject>), typeof(IRepository<IFirstTestInterface>))]
-	[Row(typeof(RepositoryWrapper<ISecondTestInterface, MultiInterfaceTestObject>), typeof(IRepository<ISecondTestInterface>))]
-	[Row(typeof(RepositoryWrapper<IThirdTestInterface, MultiInterfaceTestObject>), typeof(IRepository<IThirdTestInterface>))]
-	[Row(typeof(RepositoryWrapper<IEntityInterfaceForNonEntityTestCase, NonEntityInterfaceTestObject>), typeof(IRepository<IEntityInterfaceForNonEntityTestCase>))]
+	[Row(typeof(Repository<TestObject, TestObject>), typeof(IRepository<TestObject>))]
+	[Row(typeof(Repository<ITestObject, TestObject>), typeof(IRepository<ITestObject>))]
+	[Row(typeof(Repository<IFirstTestInterface, MultiInterfaceTestObject>), typeof(IRepository<IFirstTestInterface>))]
+	[Row(typeof(Repository<ISecondTestInterface, MultiInterfaceTestObject>), typeof(IRepository<ISecondTestInterface>))]
+	[Row(typeof(Repository<IThirdTestInterface, MultiInterfaceTestObject>), typeof(IRepository<IThirdTestInterface>))]
+	[Row(typeof(Repository<IEntityInterfaceForNonEntityTestCase, NonEntityInterfaceTestObject>), typeof(IRepository<IEntityInterfaceForNonEntityTestCase>))]
 
 	[Row(typeof(DefaultCreationStrategy<TestObject, TestObject>), typeof(ICreationStrategy<TestObject>))]
 	[Row(typeof(DefaultCreationStrategy<ITestObject, TestObject>), typeof(ICreationStrategy<ITestObject>))]

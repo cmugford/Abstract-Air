@@ -2,8 +2,9 @@
 
 namespace AbstractAir.Persistence.Domain
 {
-	public class Repository<TEntity> : IRepository<TEntity>
+	public class Repository<TEntity, TBaseEntity> : IRepository<TEntity>
 		where TEntity : class
+		where TBaseEntity : class, IEntity, TEntity
 	{
 		private readonly ISessionContextStrategy _sessionContextStrategy;
 
@@ -14,7 +15,7 @@ namespace AbstractAir.Persistence.Domain
 
 		public TEntity Get(object identifier)
 		{
-			return _sessionContextStrategy.Retrieve().Get<TEntity>(identifier);
+			return _sessionContextStrategy.Retrieve().Get<TBaseEntity>(identifier);
 		}
 	}
 }

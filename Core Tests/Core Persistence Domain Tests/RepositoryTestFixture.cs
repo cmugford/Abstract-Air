@@ -12,7 +12,6 @@ namespace AbstractAir.Persistence.Domain.Tests
 {
 	public class RepositoryTestFixture
 	{
-		private IRepository<TestObject> _repository;
 		private ISession _session;
 		private ISessionContextStrategy _sessionContextStrategy;
 		private Guid _testId;
@@ -24,7 +23,6 @@ namespace AbstractAir.Persistence.Domain.Tests
 			_sessionContextStrategy = MockRepository.GenerateStub<ISessionContextStrategy>();
 			_session = MockRepository.GenerateStub<ISession>();
 
-			_repository = new Repository<TestObject>(_sessionContextStrategy);
 			_testObject = new TestObject();
 			_testId = Guid.NewGuid();
 
@@ -35,7 +33,17 @@ namespace AbstractAir.Persistence.Domain.Tests
 		[Test]
 		public void RepositoryGetsInstanceFromSession()
 		{
-			Assert.AreSame(_testObject, _repository.Get(_testId));
+			var repository = new Repository<TestObject, TestObject>(_sessionContextStrategy);
+
+			Assert.AreSame(_testObject, repository.Get(_testId));
+		}
+
+		[Test]
+		public void RepositoryGetsInstanceAsBaseTypeForEntityInterface()
+		{
+			var repository = new Repository<ITestObject, TestObject>(_sessionContextStrategy);
+
+			Assert.AreSame(_testObject, repository.Get(_testId));
 		}
 	}
 }

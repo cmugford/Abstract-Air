@@ -103,7 +103,6 @@
     <Compile Include="PreExistingStrategyRegistrationTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryTestFixture.cs" />
-    <Compile Include="RepositoryWrapperTestFixture.cs" />
     <Compile Include="StrategyRegistrarTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>

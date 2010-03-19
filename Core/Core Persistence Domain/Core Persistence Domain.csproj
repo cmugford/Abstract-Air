@@ -97,7 +97,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repository.cs" />
-    <Compile Include="RepositoryWrapper.cs" />
     <Compile Include="StrategyRegistrar.cs" />
   </ItemGroup>
   <ItemGroup>

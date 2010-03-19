@@ -26,8 +26,6 @@ namespace AbstractAir.Persistence.Domain
 			_sessionFactory.GetAllClassMetadata()
 				.Values
 				.Apply(ProcessClassMetadata);
-
-			ObjectFactory.Configure(configure => configure.For(typeof(IRepository<>)).Use(typeof(Repository<>)));
 		}
 
 		private static void ProcessClassMetadata(IClassMetadata classMetadata)
@@ -40,14 +38,19 @@ namespace AbstractAir.Persistence.Domain
 
 			RegisterDefaultStrategies(mappedClass);
 
-			ConfigureRoles(mappedClass, typeof(IRepository<>), typeof(RepositoryWrapper<,>));
+			ConfigureRoles(mappedClass, typeof(IRepository<>), typeof(Repository<,>));
 			ConfigureRoles(mappedClass, typeof(ICreationStrategy<>), typeof(DefaultCreationStrategy<,>));
 		}
 
 		private static void RegisterDefaultStrategies(Type mappedClass)
 		{
-			ObjectFactory.Configure(configure => configure.For(typeof(ICreationStrategy<>).MakeGenericType(mappedClass))
-				.Use(typeof(DefaultCreationStrategy<,>).MakeGenericType(new[] { mappedClass, mappedClass })));
+			ObjectFactory.Configure(configure =>
+			{
+				configure.For(typeof(ICreationStrategy<>).MakeGenericType(mappedClass))
+					.Use(typeof(DefaultCreationStrategy<,>).MakeGenericType(new[] {mappedClass, mappedClass}));
+				configure.For(typeof(IRepository<>).MakeGenericType(mappedClass))
+					.Use(typeof(Repository<,>).MakeGenericType(new[] {mappedClass, mappedClass}));
+			});
 		}
 
 		private static void ConfigureRoles(Type mappedClass, Type requestedType, Type defaultType)
