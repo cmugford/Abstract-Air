@@ -1,18 +1,22 @@
 ﻿using System;
 
-using NHibernate;
-
 namespace AbstractAir.Persistence.Domain
 {
 	public class DefaultSavingStrategy<TEntity> : ISavingStrategy<TEntity>
 		where TEntity : class, IEntity
 	{
-		public void Save(TEntity instance, ISession session)
+		private readonly ISessionContextStrategy _sessionContextStrategy;
+
+		public DefaultSavingStrategy(ISessionContextStrategy sessionContextStrategy)
+		{
+			_sessionContextStrategy = ArgumentValidation.IsNotNull(sessionContextStrategy, "sessionContextStrategy");
+		}
+
+		public void Save(TEntity instance)
 		{
 			ArgumentValidation.IsNotNull(instance, "instance");
-			ArgumentValidation.IsNotNull(session, "session");
 
-			session.Save(instance);
+			_sessionContextStrategy.Retrieve().Save(instance);
 		}
 	}
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Transactions;
+
+using AbstractAir.Persistence.Domain.Properties;
 
 using NHibernate;
 
@@ -19,7 +22,16 @@ namespace AbstractAir.Persistence.Domain
 
 		public void HandleBeginMessage()
 		{
+			var transaction = Transaction.Current;
+
+			if (transaction == null)
+			{
+				throw new InvalidOperationException(Resources.NoAmbientTransactionError);
+			}
+
 			_sessionContextStrategy.Store(_sessionFactory.OpenSession());
+
+			transaction.TransactionCompleted += TransactionCompleted;
 		}
 
 		public void HandleEndMessage()
@@ -35,6 +47,20 @@ namespace AbstractAir.Persistence.Domain
 			{
 				session.Close();
 			}
+
+			_sessionContextStrategy.Clear();
+
+			Transaction.Current.TransactionCompleted -= TransactionCompleted;
+		}
+
+		private void TransactionCompleted(object sender, TransactionEventArgs e)
+		{
+			var session = _sessionContextStrategy.Retrieve();
+			if (session != null && session.IsOpen)
+			{
+				session.Close();
+			}
+			_sessionContextStrategy.Clear();
 		}
 	}
 }

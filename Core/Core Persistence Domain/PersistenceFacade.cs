@@ -7,13 +7,11 @@ namespace AbstractAir.Persistence.Domain
 	public class PersistenceFacade : IPersistenceFacade
 	{
 		private readonly IContainer _container;
-		private readonly ISessionContextStrategy _sessionContextStrategy;
 
 		[CLSCompliant(false)]
-		public PersistenceFacade(IContainer container, ISessionContextStrategy sessionContextStrategy)
+		public PersistenceFacade(IContainer container)
 		{
 			_container = ArgumentValidation.IsNotNull(container, "container");
-			_sessionContextStrategy = ArgumentValidation.IsNotNull(sessionContextStrategy, "sessionContextStrategy");
 		}
 
 		[CLSCompliant(false)]
@@ -38,7 +36,7 @@ namespace AbstractAir.Persistence.Domain
 		{
 			ArgumentValidation.IsNotNull(instance, "instance");
 
-			_container.GetInstance<ISavingStrategy<TEntity>>().Save(instance, _sessionContextStrategy.Retrieve());
+			_container.GetInstance<ISavingStrategy<TEntity>>().Save(instance);
 		}
 	}
 }

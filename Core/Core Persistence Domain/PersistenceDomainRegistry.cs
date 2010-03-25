@@ -1,8 +1,7 @@
 ﻿using System;
 
-using NServiceBus;
-
 using StructureMap.Configuration.DSL;
+using StructureMap.Pipeline;
 
 namespace AbstractAir.Persistence.Domain
 {
@@ -11,16 +10,15 @@ namespace AbstractAir.Persistence.Domain
 	{
 		public PersistenceDomainRegistry()
 		{
+			For<ISessionContextStrategy>().LifecycleIs(new SingletonLifecycle()).Use<ThreadStaticSessionContextStrategy>();
+
 			Scan(scan =>
 				{
 					scan.TheCallingAssembly();
 					scan.WithDefaultConventions();
 				});
 
-			For<ISessionContextStrategy>().Use<CallContextSessionContextStrategy>();
-			FillAllPropertiesOfType<IPersistenceFacade>();
 			For(typeof(ISavingStrategy<>)).Use(typeof(DefaultSavingStrategy<>));
-			For<IMessageModule>().Use<PersistenceMessageModule>();
 			For(typeof(IFetchingStrategy<>)).Use(typeof(DefaultFetchingStrategy<>));
 		}
 	}

@@ -68,5 +68,14 @@ namespace AbstractAir.Persistence.Domain.Properties {
                 return ResourceManager.GetString("MultipleTypesImplementTheSameRoleErrorFormat", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No ambient transaction..
+        /// </summary>
+        internal static string NoAmbientTransactionError {
+            get {
+                return ResourceManager.GetString("NoAmbientTransactionError", resourceCulture);
+            }
+        }
     }
 }

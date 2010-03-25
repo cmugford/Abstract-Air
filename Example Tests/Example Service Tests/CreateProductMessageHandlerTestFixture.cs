@@ -35,7 +35,7 @@ namespace AbstractAir.Examples.ExampleService.Tests
 			_createProductMessage.Name = TestName;
 			_createProductMessage.Category = TestCategory;
 
-			_createProductMessageHandler = new CreateProductMessageHandler { PersistenceFacade = _persistenceFacade };
+			_createProductMessageHandler = new CreateProductMessageHandler(_persistenceFacade);
 		}
 
 		[Test]

@@ -26,7 +26,7 @@ namespace AbstractAir.Persistence.Domain.Tests
 
 			PersistenceFacade.Save(instance);
 
-			savingStrategy.AssertWasCalled(strategy => strategy.Save(instance, Session));
+			savingStrategy.AssertWasCalled(strategy => strategy.Save(instance));
 		}
 	}
 }

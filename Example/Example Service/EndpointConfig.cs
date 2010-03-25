@@ -23,7 +23,8 @@ namespace AbstractAir.Examples.ExampleService
 
 			Configure.With()
 				.StructureMapBuilder()
-				.XmlSerializer();
+				.XmlSerializer()
+				.MsmqSubscriptionStorage();
 		}
 
 		private static void ConfigureStructureMap()

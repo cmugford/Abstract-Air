@@ -120,4 +120,7 @@
   <data name="MultipleTypesImplementTheSameRoleErrorFormat" xml:space="preserve">
     <value>Multiple types implement the role '{0}'. The framework needs to be able to distinguish a unique base type for each role. Change the domain so that there is only one class implementing each role interface.</value>
   </data>
+  <data name="NoAmbientTransactionError" xml:space="preserve">
+    <value>No ambient transaction.</value>
+  </data>
 </root>

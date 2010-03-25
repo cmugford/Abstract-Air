@@ -10,17 +10,22 @@ namespace AbstractAir.Examples.ExampleService
 {
 	public class CreateProductMessageHandler : IHandleMessages<ICreateProductMessage>
 	{
-		public IPersistenceFacade PersistenceFacade { get; set; }
+		private readonly IPersistenceFacade _persistenceFacade;
+
+		public CreateProductMessageHandler(IPersistenceFacade persistenceFacade)
+		{
+			_persistenceFacade = ArgumentValidation.IsNotNull(persistenceFacade, "persistenceFacade");
+		}
 
 		public void Handle(ICreateProductMessage message)
 		{
 			ArgumentValidation.IsNotNull(message, "message");
 
-			var createProduct = PersistenceFacade.CreateNew<ICreateProduct>();
+			var createProduct = _persistenceFacade.CreateNew<ICreateProduct>();
 
 			createProduct.Initialise(message.ProductId, message.Name, message.Category);
 
-			PersistenceFacade.Save(createProduct);
+			_persistenceFacade.Save(createProduct);
 		}
 	}
 }

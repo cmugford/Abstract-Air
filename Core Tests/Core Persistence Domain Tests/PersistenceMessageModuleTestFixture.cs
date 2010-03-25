@@ -1,67 +1,124 @@
 ﻿using System;
+using System.Transactions;
 
 using MbUnit.Framework;
-
-using NHibernate;
 
 using Rhino.Mocks;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	public class PersistenceMessageModuleTestFixture
+	public class PersistenceMessageModuleTestFixture : PersistenceMessageModuleTestFixtureBase
 	{
-		private ISessionContextStrategy _sessionContextStrategy;
-		private ISessionFactory _sessionFactory;
-		private ISession _session;
-		private PersistenceMessageModule _persistenceMessageModule;
+		private TransactionScope _transactionScope;
 
 		[SetUp]
-		public void Setup()
+		public override void Setup()
 		{
-			_sessionContextStrategy = MockRepository.GenerateStub<ISessionContextStrategy>();
-			_sessionFactory = MockRepository.GenerateStub<ISessionFactory>();
-			_session = MockRepository.GenerateStub<ISession>();
+			base.Setup();
 
-			_sessionFactory.Stub(factory => factory.OpenSession()).Return(_session);
-			_sessionContextStrategy.Stub(strategy => strategy.Retrieve()).Return(_session);
+			_transactionScope = new TransactionScope();
+		}
 
-			_persistenceMessageModule = new PersistenceMessageModule(_sessionContextStrategy, _sessionFactory);
+		[TearDown]
+		public void TearDown()
+		{
+			_transactionScope.Dispose();
+			_transactionScope = null;
 		}
 
 		[Test]
 		public void SessionCreatedOnBeginMessage()
 		{
-			_persistenceMessageModule.HandleBeginMessage();
+			PersistenceMessageModule.HandleBeginMessage();
 
-			_sessionContextStrategy.AssertWasCalled(strategy => strategy.Store(_session));
+			SessionContextStrategy.AssertWasCalled(strategy => strategy.Store(Session));
 		}
 
 		[Test]
 		public void SessionFlushedOnEndMessage()
 		{
-			_persistenceMessageModule.HandleEndMessage();
+			PersistenceMessageModule.HandleEndMessage();
 
-			_session.AssertWasCalled(session => session.Flush());
+			Session.AssertWasCalled(session => session.Flush());
 		}
 
 		[Test]
 		public void SessionClosedOnErrorMessage()
 		{
-			_session.Stub(session => session.IsOpen).Return(true);
+			Session.Stub(session => session.IsOpen).Return(true);
 
-			_persistenceMessageModule.HandleError();
+			PersistenceMessageModule.HandleError();
 
-			_session.AssertWasCalled(session => session.Close());
+			Session.AssertWasCalled(session => session.Close());
+		}
+
+		[Test]
+		public void SessionRemovedFromContextOnErrorMessage()
+		{
+			PersistenceMessageModule.HandleError();
+
+			SessionContextStrategy.AssertWasCalled(context => context.Clear());
 		}
 
 		[Test]
 		public void SessionNotClosedOnErrorMessageIfNotOpen()
 		{
-			_session.Stub(session => session.IsOpen).Return(false);
+			Session.Stub(session => session.IsOpen).Return(false);
 
-			_persistenceMessageModule.HandleError();
+			PersistenceMessageModule.HandleError();
 
-			_session.AssertWasNotCalled(session => session.Close());
+			Session.AssertWasNotCalled(session => session.Close());
+		}
+
+		[Test]
+		public void OpenSessionClosedOnTransactionComplete()
+		{
+			Session.Stub(session => session.IsOpen).Return(true);
+			PersistenceMessageModule.HandleBeginMessage();
+			_transactionScope.Dispose();
+
+			Session.AssertWasCalled(session => session.Close());
+		}
+
+		[Test]
+		public void ClosedSessionNotClosedOnTransactionComplete()
+		{
+			Session.Stub(session => session.IsOpen).Return(false);
+			PersistenceMessageModule.HandleBeginMessage();
+			_transactionScope.Dispose();
+
+			Session.AssertWasNotCalled(session => session.Close());
+		}
+
+		[Test]
+		public void SessionRemovedFromContextOnTransactionClose()
+		{
+			PersistenceMessageModule.HandleBeginMessage();
+			_transactionScope.Dispose();
+
+			SessionContextStrategy.Stub(strategy => strategy.Clear());
+		}
+
+		[Test]
+		public void TransactionCompletedUnhookedOnError()
+		{
+			PersistenceMessageModule.HandleBeginMessage();
+			PersistenceMessageModule.HandleError();
+
+			_transactionScope.Dispose();
+
+			Session.AssertWasNotCalled(session => session.Close());
+		}
+
+		[Test]
+		public void TransactionCompletedHandlerHandlesClearContext()
+		{
+			var sessionContextStrategy = MockRepository.GenerateStub<ISessionContextStrategy>();
+			var persistenceMessageModule = new PersistenceMessageModule(sessionContextStrategy, SessionFactory);
+
+			persistenceMessageModule.HandleBeginMessage();
+
+			_transactionScope.Dispose();
 		}
 	}
 }
