@@ -74,6 +74,7 @@
     <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\System.Data.SQLite.DLL</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq">
@@ -101,6 +102,7 @@
     <Compile Include="PersistenceFacadeTestFixtureBase.cs" />
     <Compile Include="PersistenceMessageModuleTestFixture.cs" />
     <Compile Include="PersistenceMessageModuleTestFixtureBase.cs" />
+    <Compile Include="PersistenceMessageModuleWithNoSessionTestFixture.cs" />
     <Compile Include="PersistenceMessageModuleWithoutAmbientTransactionTestFixture.cs" />
     <Compile Include="PreExistingStrategyRegistrationTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

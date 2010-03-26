@@ -43,7 +43,7 @@ namespace AbstractAir.Persistence.Domain
 		{
 			var session = _sessionContextStrategy.Retrieve();
 
-			if (session.IsOpen)
+			if (session != null && session.IsOpen)
 			{
 				session.Close();
 			}

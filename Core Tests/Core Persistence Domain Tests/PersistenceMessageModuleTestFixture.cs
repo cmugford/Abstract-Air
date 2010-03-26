@@ -3,12 +3,15 @@ using System.Transactions;
 
 using MbUnit.Framework;
 
+using NHibernate;
+
 using Rhino.Mocks;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
 	public class PersistenceMessageModuleTestFixture : PersistenceMessageModuleTestFixtureBase
 	{
+		private ISession _session;
 		private TransactionScope _transactionScope;
 
 		[SetUp]
@@ -16,7 +19,12 @@ namespace AbstractAir.Persistence.Domain.Tests
 		{
 			base.Setup();
 
+			_session = MockRepository.GenerateStub<ISession>();
+
 			_transactionScope = new TransactionScope();
+
+			SessionFactory.Stub(factory => factory.OpenSession()).Return(_session);
+			SessionContextStrategy.Stub(strategy => strategy.Retrieve()).Return(_session);
 		}
 
 		[TearDown]
@@ -31,7 +39,7 @@ namespace AbstractAir.Persistence.Domain.Tests
 		{
 			PersistenceMessageModule.HandleBeginMessage();
 
-			SessionContextStrategy.AssertWasCalled(strategy => strategy.Store(Session));
+			SessionContextStrategy.AssertWasCalled(strategy => strategy.Store(_session));
 		}
 
 		[Test]
@@ -39,17 +47,17 @@ namespace AbstractAir.Persistence.Domain.Tests
 		{
 			PersistenceMessageModule.HandleEndMessage();
 
-			Session.AssertWasCalled(session => session.Flush());
+			_session.AssertWasCalled(session => session.Flush());
 		}
 
 		[Test]
 		public void SessionClosedOnErrorMessage()
 		{
-			Session.Stub(session => session.IsOpen).Return(true);
+			_session.Stub(session => session.IsOpen).Return(true);
 
 			PersistenceMessageModule.HandleError();
 
-			Session.AssertWasCalled(session => session.Close());
+			_session.AssertWasCalled(session => session.Close());
 		}
 
 		[Test]
@@ -63,31 +71,31 @@ namespace AbstractAir.Persistence.Domain.Tests
 		[Test]
 		public void SessionNotClosedOnErrorMessageIfNotOpen()
 		{
-			Session.Stub(session => session.IsOpen).Return(false);
+			_session.Stub(session => session.IsOpen).Return(false);
 
 			PersistenceMessageModule.HandleError();
 
-			Session.AssertWasNotCalled(session => session.Close());
+			_session.AssertWasNotCalled(session => session.Close());
 		}
 
 		[Test]
 		public void OpenSessionClosedOnTransactionComplete()
 		{
-			Session.Stub(session => session.IsOpen).Return(true);
+			_session.Stub(session => session.IsOpen).Return(true);
 			PersistenceMessageModule.HandleBeginMessage();
 			_transactionScope.Dispose();
 
-			Session.AssertWasCalled(session => session.Close());
+			_session.AssertWasCalled(session => session.Close());
 		}
 
 		[Test]
 		public void ClosedSessionNotClosedOnTransactionComplete()
 		{
-			Session.Stub(session => session.IsOpen).Return(false);
+			_session.Stub(session => session.IsOpen).Return(false);
 			PersistenceMessageModule.HandleBeginMessage();
 			_transactionScope.Dispose();
 
-			Session.AssertWasNotCalled(session => session.Close());
+			_session.AssertWasNotCalled(session => session.Close());
 		}
 
 		[Test]
@@ -107,18 +115,7 @@ namespace AbstractAir.Persistence.Domain.Tests
 
 			_transactionScope.Dispose();
 
-			Session.AssertWasNotCalled(session => session.Close());
-		}
-
-		[Test]
-		public void TransactionCompletedHandlerHandlesClearContext()
-		{
-			var sessionContextStrategy = MockRepository.GenerateStub<ISessionContextStrategy>();
-			var persistenceMessageModule = new PersistenceMessageModule(sessionContextStrategy, SessionFactory);
-
-			persistenceMessageModule.HandleBeginMessage();
-
-			_transactionScope.Dispose();
+			_session.AssertWasNotCalled(session => session.Close());
 		}
 	}
 }
