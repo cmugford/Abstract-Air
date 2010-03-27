@@ -6,6 +6,8 @@ using AbstractAir.Examples.DomainEventHandlers;
 using AbstractAir.Persistence;
 using AbstractAir.Persistence.Domain;
 
+using log4net.Config;
+
 using NHibernate.Dialect;
 using NHibernate.Driver;
 
@@ -15,7 +17,7 @@ using StructureMap;
 
 namespace AbstractAir.Examples.ExampleService
 {
-	public class EndpointConfig : IConfigureThisEndpoint, AsA_Publisher, IWantCustomInitialization
+	public class EndpointConfig : IConfigureThisEndpoint, AsA_Publisher, IWantCustomInitialization, IWantCustomLogging
 	{
 		public void Init()
 		{
@@ -25,6 +27,8 @@ namespace AbstractAir.Examples.ExampleService
 				.StructureMapBuilder()
 				.XmlSerializer()
 				.MsmqSubscriptionStorage();
+
+			SetLoggingLibrary.Log4Net(XmlConfigurator.Configure);
 		}
 
 		private static void ConfigureStructureMap()
@@ -36,10 +40,10 @@ namespace AbstractAir.Examples.ExampleService
 					configure.AddRegistry<EventHandlersRegistry>();
 
 					configure.For<IPersistenceConfigurator>().Use<PersistenceConfigurator<MsSql2008Dialect, SqlClientDriver>>();
-					configure.For<IPersistenceConfiguration>().Use((IPersistenceConfiguration)ConfigurationManager.GetSection("persistenceConfiguration"));
+					configure.For<IPersistenceConfiguration>().Use((IPersistenceConfiguration) ConfigurationManager.GetSection("persistenceConfiguration"));
 				});
 
-			ObjectFactory.GetInstance<IPersistenceConfigurator>().ConfigurePersistence(new[] { typeof(Product).Assembly });
+			ObjectFactory.GetInstance<IPersistenceConfigurator>().ConfigurePersistence(new[] {typeof(Product).Assembly});
 			ObjectFactory.GetInstance<IStrategyRegistrar>().Register();
 
 			DomainEvents.Container = ObjectFactory.Container;

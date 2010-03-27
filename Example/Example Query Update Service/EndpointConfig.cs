@@ -1,5 +1,7 @@
 ﻿using System;
 
+using log4net.Config;
+
 using NServiceBus;
 
 using StructureMap;
@@ -16,6 +18,8 @@ namespace AbstractAir.Examples.QueryUpdateService
 				.StructureMapBuilder()
 				.XmlSerializer()
 				.MsmqSubscriptionStorage();
+
+			SetLoggingLibrary.Log4Net(XmlConfigurator.Configure);
 		}
 
 		private static void ConfigureStructureMap()

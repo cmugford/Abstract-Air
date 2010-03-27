@@ -3,6 +3,8 @@ using System.Globalization;
 
 using AbstractAir.Examples.InternalMessages;
 
+using log4net.Config;
+
 using NServiceBus;
 
 using StructureMap;
@@ -26,14 +28,14 @@ namespace AbstractAir.Examples.ExampleClient
 				bus.Send<ICreateProductMessage>(message =>
 					{
 						message.ProductId = productId;
-						message.Name = string.Format(CultureInfo.CurrentCulture, "Product {0}", localCount);
+						message.Name = string.Format(CultureInfo.CurrentCulture, "Product {0} {1:G}", localCount, DateTime.UtcNow);
 						message.Category = string.Format(CultureInfo.CurrentCulture, "Product Category {0}", localCount);
 					});
 
 				bus.Send<IRenameProductMessage>(message =>
 					{
 						message.ProductId = productId;
-						message.Name = string.Format(CultureInfo.CurrentCulture, "Rename Product {0}", localCount);
+						message.Name = string.Format(CultureInfo.CurrentCulture, "Rename Product {0} {1:G}", localCount, DateTime.UtcNow);
 					});
 			}
 		}
@@ -51,6 +53,8 @@ namespace AbstractAir.Examples.ExampleClient
 					.LoadMessageHandlers()
 				.CreateBus()
 				.Start();
+
+			SetLoggingLibrary.Log4Net(XmlConfigurator.Configure);
 		}
 	}
 }

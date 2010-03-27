@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using AutoMapper;
 using AutoMapper.Mappers;
 
+using log4net;
+
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
 
@@ -32,6 +34,8 @@ namespace AbstractAir
 			For<IConfiguration>().Use(context => context.GetInstance<Configuration>());
 
 			For<IMappingEngine>().Use<MappingEngine>();
+
+			For<ILog>().Use(context => LogManager.GetLogger(context.ParentType ?? typeof(object)));
 		}
 	}
 }

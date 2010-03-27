@@ -80,6 +80,9 @@
       <Link>Abstract Air.snk</Link>
     </None>
     <None Include="App.config" />
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Example Internal Messages\Example Internal Messages.csproj">

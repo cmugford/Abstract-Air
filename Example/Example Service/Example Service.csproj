@@ -91,6 +91,9 @@
       <Link>Abstract Air.snk</Link>
     </None>
     <None Include="App.config" />
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core Persistence Domain\Core Persistence Domain.csproj">
