@@ -16,8 +16,7 @@ namespace AbstractAir.Examples.QueryUpdateService
 
 			Configure.With()
 				.StructureMapBuilder()
-				.XmlSerializer()
-				.MsmqSubscriptionStorage();
+				.XmlSerializer();
 
 			SetLoggingLibrary.Log4Net(XmlConfigurator.Configure);
 		}
