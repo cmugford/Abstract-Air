@@ -39,7 +39,7 @@ namespace AbstractAir.Examples.ExampleService
 					configure.AddRegistry<EventHandlersRegistry>();
 
 					configure.For<IPersistenceConfigurator>().Use<PersistenceConfigurator<MsSql2008Dialect, SqlClientDriver>>();
-					configure.For<IPersistenceConfiguration>().Use((IPersistenceConfiguration) ConfigurationManager.GetSection("persistenceConfiguration"));
+					configure.For<IPersistenceConfiguration>().Use((IPersistenceConfiguration) ConfigurationManager.GetSection("persistence"));
 				});
 
 			ObjectFactory.GetInstance<IPersistenceConfigurator>().ConfigurePersistence(new[] {typeof(Product).Assembly});

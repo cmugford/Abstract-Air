@@ -34,7 +34,7 @@ namespace AbstractAir.Persistence
 				.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, typeof(TDriver).AssemblyQualifiedName)
 				.SetProperty(NHibernate.Cfg.Environment.ConnectionString, _persistenceConfiguration.ConnectionString)
 				.SetProperty(NHibernate.Cfg.Environment.ProxyFactoryFactoryClass, typeof(ProxyFactoryFactory).AssemblyQualifiedName)
-				.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");
+				.SetProperty(NHibernate.Cfg.Environment.ShowSql, "false");
 
 			assemblies.Apply(assembly => Configuration.AddAssembly(assembly));
 

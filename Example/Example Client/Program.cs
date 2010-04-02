@@ -13,17 +13,21 @@ namespace AbstractAir.Examples.ExampleClient
 {
 	public static class Program
 	{
+		private const int NumberOfMessages = 10000;
+
 		public static void Main()
 		{
+			Console.WriteLine("Press any key to start. Make sure the other services are started.");
+			Console.ReadKey();
+
 			ConfigureNServiceBus();
 
 			var bus = ObjectFactory.GetInstance<IBus>();
 
-			var count = 0;
-			while (Console.ReadLine() != "q")
+			for (var count = 0; count < NumberOfMessages; count++)
 			{
 				var productId = Guid.NewGuid();
-				var localCount = count++;
+				var localCount = count;
 
 				bus.Send<ICreateProductMessage>(message =>
 					{
@@ -37,6 +41,11 @@ namespace AbstractAir.Examples.ExampleClient
 						message.ProductId = productId;
 						message.Name = string.Format(CultureInfo.CurrentCulture, "Rename Product {0} {1:G}", localCount, DateTime.UtcNow);
 					});
+
+				if (count % 100 == 0)
+				{
+					Console.Write(".");
+				}
 			}
 		}
 

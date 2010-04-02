@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Configuration;
+
+using AbstractAir.Queries;
 
 using log4net.Config;
 
@@ -14,6 +17,8 @@ namespace AbstractAir.Examples.QueryUpdateService
 		{
 			ConfigureStructureMap();
 
+			ObjectFactory.GetInstance<IQueryConfigurator>().ConfigureQuerying();
+
 			Configure.With()
 				.StructureMapBuilder()
 				.XmlSerializer();
@@ -23,7 +28,13 @@ namespace AbstractAir.Examples.QueryUpdateService
 
 		private static void ConfigureStructureMap()
 		{
-			ObjectFactory.Configure(configure => configure.AddRegistry<CoreRegistry>());
+			ObjectFactory.Configure(configure =>
+				{
+					configure.AddRegistry<CoreRegistry>();
+					configure.AddRegistry<QueryRegistry>();
+
+					configure.For<IQueryConfiguration>().Use((IQueryConfiguration) ConfigurationManager.GetSection("queries"));
+				});
 		}
 	}
 }

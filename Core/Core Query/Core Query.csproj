@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5CAC54A0-D670-4C42-BD5A-8A8C697B90D4}</ProjectGuid>
+    <ProjectGuid>{A0177A08-735C-49E7-AF9A-48343E609B98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AbstractAir.Examples.QueryUpdateService</RootNamespace>
-    <AssemblyName>AbstractAir.Examples.QueryUpdateService</AssemblyName>
+    <RootNamespace>AbstractAir.Queries</RootNamespace>
+    <AssemblyName>AbstractAir.Queries</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\ExampleOutput\ExampleQueryUpdateService\</OutputPath>
+    <OutputPath>..\..\CoreOutput\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,36 +28,16 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\ExampleOutput\ExampleQueryUpdateService\</OutputPath>
+    <OutputPath>..\..\CoreOutput\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Norm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=69a6583b49a2266e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\Norm.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\NServiceBus.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Host, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\NServiceBus.Host.exe</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.ObjectBuilder.StructureMap, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\NServiceBus.ObjectBuilder.StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,35 +61,22 @@
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CreateProductSummaryMessageHandler.cs" />
-    <Compile Include="EndpointConfig.cs" />
+    <Compile Include="IQueryConfiguration.cs" />
+    <Compile Include="IQueryConfigurator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryRegistry.cs" />
+    <Compile Include="QueryConfiguration.cs" />
+    <Compile Include="QueryConfigurator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Abstract Air.snk">
       <Link>Abstract Air.snk</Link>
     </None>
-    <None Include="App.config" />
-    <None Include="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core Query\Core Query.csproj">
-      <Project>{A0177A08-735C-49E7-AF9A-48343E609B98}</Project>
-      <Name>Core Query</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\Core\Core.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{542CE7BC-2839-4A92-A7B6-A3F53B567AF5}</Project>
       <Name>Core %28Core\Core%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Example Messages\Example Messages.csproj">
-      <Project>{7D4CF127-1B1D-440D-954A-B7E7A81513FB}</Project>
-      <Name>Example Messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Example Query Schema\Example Query Schema.csproj">
-      <Project>{AFD53BBF-3983-45B5-80BD-AAA723D51C49}</Project>
-      <Name>Example Query Schema</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
