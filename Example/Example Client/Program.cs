@@ -13,7 +13,7 @@ namespace AbstractAir.Examples.ExampleClient
 {
 	public static class Program
 	{
-		private const int NumberOfMessages = 10000;
+		private const int NumberOfMessages = 1000000;
 
 		public static void Main()
 		{
@@ -36,11 +36,11 @@ namespace AbstractAir.Examples.ExampleClient
 						message.Category = string.Format(CultureInfo.CurrentCulture, "Product Category {0}", localCount);
 					});
 
-				bus.Send<IRenameProductMessage>(message =>
-					{
-						message.ProductId = productId;
-						message.Name = string.Format(CultureInfo.CurrentCulture, "Rename Product {0} {1:G}", localCount, DateTime.UtcNow);
-					});
+				//bus.Send<IRenameProductMessage>(message =>
+				//    {
+				//        message.ProductId = productId;
+				//        message.Name = string.Format(CultureInfo.CurrentCulture, "Rename Product {0} {1:G}", localCount, DateTime.UtcNow);
+				//    });
 
 				if (count % 100 == 0)
 				{
