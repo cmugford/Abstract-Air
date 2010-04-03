@@ -1,44 +1,70 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Configuration;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
+
+using AbstractAir.Queries;
+
 using MvcContrib.ControllerFactories;
 using MvcContrib.StructureMap;
 using MvcContrib.UI.InputBuilder;
+
+using NServiceBus;
+
 using StructureMap;
 
 namespace AbstractAir.Web.Portal
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
+	public class MvcApplication : HttpApplication
+	{
+		public static void RegisterRoutes(RouteCollection routes)
+		{
+			routes.IgnoreRoute("elmah.axd");
+			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-    public class MvcApplication : System.Web.HttpApplication
-    {
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.IgnoreRoute("elmah.axd");
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+			routes.MapRoute("Default",
+				"{controller}/{action}/{id}",
+				new {controller = "Home", action = "Index", id = UrlParameter.Optional});
 
-            routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
+			ObjectFactory.Configure(initialise =>
+				{
+					initialise.AddRegistry<CoreRegistry>();
+					initialise.AddRegistry<QueryRegistry>();
+					initialise.AddRegistry<PortalRegistry>();
 
-            ObjectFactory.Initialize(x => x.AddRegistry(new CoreRegistry()));
+					initialise.For<IQueryConfiguration>().Use((IQueryConfiguration)ConfigurationManager.GetSection("queries"));
+				});
 
-            ControllerBuilder.Current.SetControllerFactory(
-                new IoCControllerFactory(
-                    new StructureMapDependencyResolver()));
+			ObjectFactory.GetInstance<IQueryConfigurator>().ConfigureQuerying();
 
-            // Used for testing routes
-            //MvcContrib.Routing.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
-        }
+			ControllerBuilder.Current.SetControllerFactory(new IoCControllerFactory(new StructureMapDependencyResolver()));
+		}
 
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
+		protected void Application_Start()
+		{
+			ConfigureNServiceBus();
 
-            RegisterRoutes(RouteTable.Routes);
-            InputBuilder.BootStrap();
-        }
-    }
+			AreaRegistration.RegisterAllAreas();
+
+			RegisterRoutes(RouteTable.Routes);
+
+			InputBuilder.BootStrap();
+		}
+
+		private static void ConfigureNServiceBus()
+		{
+			Configure.WithWeb()
+				.StructureMapBuilder()
+				.XmlSerializer()
+				.MsmqTransport()
+					.IsTransactional(false)
+					.PurgeOnStartup(false)
+				.UnicastBus()
+					.ImpersonateSender(false)
+					.LoadMessageHandlers()
+				.CreateBus()
+				.Start();
+		}
+	}
 }

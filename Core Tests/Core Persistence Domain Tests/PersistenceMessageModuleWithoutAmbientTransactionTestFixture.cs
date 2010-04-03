@@ -4,7 +4,6 @@ using MbUnit.Framework;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	[TestFixture]
 	public class PersistenceMessageModuleWithoutAmbientTransactionTestFixture : PersistenceMessageModuleTestFixtureBase
 	{
 		[SetUp]

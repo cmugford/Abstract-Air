@@ -5,7 +5,6 @@ using MbUnit.Framework;
 
 namespace AbstractAir.Persistence.Domain.Tests
 {
-	[TestFixture]
 	public class PersistenceMessageModuleWithNoSessionTestFixture : PersistenceMessageModuleTestFixtureBase
 	{
 		private TransactionScope _transactionScope;

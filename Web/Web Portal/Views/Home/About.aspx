@@ -4,14 +4,12 @@
     About Us
 </asp:Content>
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        About</h2>
+    <h2>About</h2>
     <p>
         Abstract Air is an example CQRS/SOA project being built to experiment with these
         concepts. It should never be used to try to run an actual airline.
     </p>
-    <h3>
-        License</h3>
+    <h3>License</h3>
     <textarea rows="15" style="width: 100%;">
                                  Apache License
                            Version 2.0, January 2004

@@ -1,27 +1,24 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+
 using MvcContrib.PortableAreas;
 
 namespace AbstractAir.Example.Web.Areas.Example
 {
-    public class ExampleAreaRegistration : PortableAreaRegistration
-    {
-        public override string AreaName
-        {
-            get
-            {
-                return "Example";
-            }
-        }
+	public class ExampleAreaRegistration : PortableAreaRegistration
+	{
+		public override string AreaName
+		{
+			get { return "Example"; }
+		}
 
-        public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
-        {
-            context.MapRoute(
-                "Example_default",
-                "Example/{controller}/{action}",
-                new { controller = "Example", action = "Index" }
-            );
+		public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
+		{
+			context.MapRoute("Example_default",
+				"Example/{controller}/{action}/{id}",
+				new { controller = "Example", action = "Index", id = UrlParameter.Optional });
 
-            RegisterTheViewsInTheEmbeddedViewEngine(GetType());
-        }
-    }
+			RegisterTheViewsInTheEmbeddedViewEngine(GetType());
+		}
+	}
 }

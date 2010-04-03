@@ -12,7 +12,6 @@ using Rhino.Mocks;
 
 namespace AbstractAir.Examples.QueryUpdateService.Tests
 {
-	[TestFixture]
 	public class CreateProductSummaryMessageHandlerTestFixture
 	{
 		private const string TestName = "Test Product";

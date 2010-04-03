@@ -2,11 +2,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Abstract Air Web Portal")]
+[assembly: AssemblyTitle("Example Web Tests")]
 [assembly: AssemblyDescription("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("01a2a22b-a87e-4e99-9de9-96f0716fb3db")]
+[assembly: Guid("132e2547-5257-4800-ad21-25334abf5c6d")]
 
-[assembly: CLSCompliant(true)]
+[assembly: CLSCompliant(false)]

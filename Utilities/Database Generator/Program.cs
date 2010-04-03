@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
-using AbstractAir;
 using AbstractAir.Persistence;
 
 using NHibernate.Dialect;
