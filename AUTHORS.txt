@@ -3,3 +3,4 @@ Abstract Air AUTHORS
 
 * Charles Mugford
 * Colin David Scott <colin@abstractcode.com>
+* Daniel Okely <dbokely@gmail.com>
