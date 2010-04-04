@@ -10,5 +10,21 @@ namespace AbstractAir.Example.Web.Areas.Example.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Create")]
+        public ActionResult CreatePost(string productName)
+        {
+            // TODO: Create the product
+
+            // TODO: Get the ID
+
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Areas\Example\Controllers\ExampleController.cs" />
     <Compile Include="Areas\Example\ExampleAreaRegistration.cs" />
+    <Compile Include="Areas\Example\Models\ProductCreateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,8 +83,8 @@
     <None Include="..\..\Abstract Air.snk">
       <Link>Abstract Air.snk</Link>
     </None>
-    <Content Include="Areas\Example\Views\Web.config" />
-    <Content Include="Web.config" />
+    <EmbeddedResource Include="Areas\Example\Views\Example\Create.aspx" />
+    <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core\Core.csproj">
@@ -93,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Example\Models\" />
     <Folder Include="Areas\Example\Views\Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
