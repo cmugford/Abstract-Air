@@ -96,10 +96,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core Persistence Domain\Core Persistence Domain.csproj">
-      <Project>{81CC26B5-E8E3-4563-A43B-D7AE633D0576}</Project>
-      <Name>Core Persistence Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core Persistence\Core Persistence.csproj">
       <Project>{16F2AA72-6C4E-4018-BC04-8E47EE78561B}</Project>
       <Name>Core Persistence</Name>

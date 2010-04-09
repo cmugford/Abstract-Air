@@ -1,6 +1,6 @@
 ﻿using System;
 
-using AbstractAir.Persistence.Domain;
+using AbstractAir.Persistence;
 
 using MbUnit.Framework;
 

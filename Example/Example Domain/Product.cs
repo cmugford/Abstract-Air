@@ -1,7 +1,7 @@
 ﻿using System;
 
 using AbstractAir.Examples.Domain.Properties;
-using AbstractAir.Persistence.Domain;
+using AbstractAir.Persistence;
 
 namespace AbstractAir.Examples.Domain
 {

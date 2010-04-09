@@ -1,6 +1,6 @@
 ﻿using System;
 
-using AbstractAir.Persistence.Domain;
+using AbstractAir.Persistence;
 
 namespace AbstractAir.TestDomainObjects
 {

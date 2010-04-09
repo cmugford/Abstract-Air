@@ -2,7 +2,7 @@
 
 using AbstractAir.Examples.Domain;
 using AbstractAir.Examples.Messages;
-using AbstractAir.Persistence.Domain;
+using AbstractAir.Persistence;
 
 using NServiceBus;
 

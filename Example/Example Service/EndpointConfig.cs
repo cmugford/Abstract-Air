@@ -4,7 +4,6 @@ using System.Configuration;
 using AbstractAir.Examples.Domain;
 using AbstractAir.Examples.DomainEventHandlers;
 using AbstractAir.Persistence;
-using AbstractAir.Persistence.Domain;
 
 using log4net.Config;
 
