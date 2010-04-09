@@ -1,7 +1,7 @@
 ﻿using System;
 
-using AbstractAir.Example.Web.Areas.Example.Controllers;
-using AbstractAir.Example.Web.Models;
+using AbstractAir.Example.UI.Area.Controllers;
+using AbstractAir.Example.UI.Area.Models;
 using AbstractAir.Examples.InternalMessages;
 
 using MbUnit.Framework;
@@ -10,7 +10,7 @@ using NServiceBus;
 
 using Rhino.Mocks;
 
-namespace AbstractAir.Example.Web.Tests.Controllers
+namespace AbstractAir.Example.UI.Tests.Controllers
 {
 	public class ExampleControllerTestFixture
 	{
@@ -44,7 +44,7 @@ namespace AbstractAir.Example.Web.Tests.Controllers
 		{
 			_exampleController.CreateProduct(_createProductModel);
 
-			_bus.AssertWasCalled(bus => bus.Send<ICreateProductMessage>(Arg<Action<ICreateProductMessage>>.Is.NotNull));
+			_bus.AssertWasCalled(bus => bus.Send(Arg<Action<ICreateProductMessage>>.Is.NotNull));
 		}
 	}
 }

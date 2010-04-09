@@ -58,10 +58,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\MvcContrib.dll</HintPath>
     </Reference>
-    <Reference Include="MvcContrib.StructureMap, Version=2.0.34.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\MvcContrib.StructureMap.dll</HintPath>
-    </Reference>
     <Reference Include="NServiceBus, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
@@ -153,8 +149,13 @@
     <None Include="..\..\Abstract Air.snk">
       <Link>Abstract Air.snk</Link>
     </None>
+    <Content Include="Areas\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core Portal\Core Portal.csproj">
+      <Project>{BB7B4391-A581-4F69-BDC9-D5C299BAD921}</Project>
+      <Name>Core Portal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core Query\Core Query.csproj">
       <Project>{A0177A08-735C-49E7-AF9A-48343E609B98}</Project>
       <Name>Core Query</Name>
@@ -163,9 +164,9 @@
       <Project>{542CE7BC-2839-4A92-A7B6-A3F53B567AF5}</Project>
       <Name>Core %28Core\Core%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Example\Example Web\Example Web.csproj">
-      <Project>{7923EEC8-728A-4795-9178-FD5E0BCC7DA6}</Project>
-      <Name>Example Web</Name>
+    <ProjectReference Include="..\..\Example\Example UI\Example UI.csproj">
+      <Project>{44608CC0-BD9E-42FF-B256-DB7B90C0BAFA}</Project>
+      <Name>Example UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

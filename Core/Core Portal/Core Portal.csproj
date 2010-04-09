@@ -5,19 +5,21 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C08346C4-54B2-4596-A743-129719BBE055}</ProjectGuid>
+    <ProjectGuid>{BB7B4391-A581-4F69-BDC9-D5C299BAD921}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AbstractAir.Example.Web.Tests</RootNamespace>
-    <AssemblyName>AbstractAir.Example.Web.Tests</AssemblyName>
+    <RootNamespace>AbstractAir.Portal</RootNamespace>
+    <AssemblyName>AbstractAir.Portal</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Abstract Air.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\ExampleTestsOutput\</OutputPath>
+    <OutputPath>..\..\CoreOutput\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,32 +28,20 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\ExampleTestsOutput\</OutputPath>
+    <OutputPath>..\..\CoreOutput\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+    <Reference Include="MvcContrib, Version=2.0.34.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Tools\GallioBundle-3.1.397.0\bin\Gallio.dll</HintPath>
+      <HintPath>..\..\Lib\MvcContrib.dll</HintPath>
     </Reference>
-    <Reference Include="MbUnit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Tools\GallioBundle-3.1.397.0\bin\MbUnit.dll</HintPath>
-    </Reference>
-    <Reference Include="Norm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=69a6583b49a2266e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\Norm.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Tools\Rhino Mocks 3.6\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\Lib\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -74,18 +64,13 @@
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controllers\ExampleControllerTestFixture.cs" />
-    <Compile Include="MvcAssert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StructureMapControllerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Example\Example Internal Messages\Example Internal Messages.csproj">
-      <Project>{7A13BD00-3F82-4073-A777-EB60C5757890}</Project>
-      <Name>Example Internal Messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Example\Example Web\Example Web.csproj">
-      <Project>{7923EEC8-728A-4795-9178-FD5E0BCC7DA6}</Project>
-      <Name>Example Web</Name>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{542CE7BC-2839-4A92-A7B6-A3F53B567AF5}</Project>
+      <Name>Core %28Core\Core%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

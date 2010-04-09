@@ -1,8 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 using MbUnit.Framework;
 
-namespace AbstractAir.Example.Web.Tests
+namespace AbstractAir.Example.UI.Tests
 {
 	public static class MvcAssert
 	{

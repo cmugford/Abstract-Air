@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Web.Mvc;
 
-using AbstractAir.Example.Web.Models;
+using AbstractAir.Example.UI.Area.Models;
 using AbstractAir.Examples.InternalMessages;
 
 using NServiceBus;
 
-namespace AbstractAir.Example.Web.Areas.Example.Controllers
+namespace AbstractAir.Example.UI.Area.Controllers
 {
     [HandleError]
     public class ExampleController : Controller
@@ -32,6 +32,7 @@ namespace AbstractAir.Example.Web.Areas.Example.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult CreateProduct(CreateProductModel createProductModel)
 		{
+			_bus.CreateInstance<ICreateProductMessage>();
 			_bus.Send<ICreateProductMessage>(message =>
 				{
 					message.ProductId = Guid.NewGuid();

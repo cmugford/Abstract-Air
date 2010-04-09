@@ -4,10 +4,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using AbstractAir.Example.UI;
+using AbstractAir.Portal;
 using AbstractAir.Queries;
 
-using MvcContrib.ControllerFactories;
-using MvcContrib.StructureMap;
 using MvcContrib.UI.InputBuilder;
 
 using NServiceBus;
@@ -32,13 +32,14 @@ namespace AbstractAir.Web.Portal
 					initialise.AddRegistry<CoreRegistry>();
 					initialise.AddRegistry<QueryRegistry>();
 					initialise.AddRegistry<PortalRegistry>();
+					initialise.AddRegistry<ExampleUIRegistry>();
 
 					initialise.For<IQueryConfiguration>().Use((IQueryConfiguration)ConfigurationManager.GetSection("queries"));
 				});
 
 			ObjectFactory.GetInstance<IQueryConfigurator>().ConfigureQuerying();
 
-			ControllerBuilder.Current.SetControllerFactory(new IoCControllerFactory(new StructureMapDependencyResolver()));
+			ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(ObjectFactory.Container));
 		}
 
 		protected void Application_Start()
