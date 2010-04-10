@@ -59,8 +59,8 @@
 		</MSBuild>
 	</Target>
 	<Target Name="Test" DependsOnTargets="Build">
-		<RemoveDir Directories="TestsOutput\Report" Condition="Exists('TestsOutput\Report')"/>
-		<MakeDir Directories="TestsOutput\Report"/>
+		<RemoveDir Directories="TestsReport" Condition="Exists('TestsReport')"/>
+		<MakeDir Directories="TestsReport"/>
 
 		<MSBuild Projects="@(TestSupportProjects)" Targets="Rebuild"/>
 		
@@ -70,7 +70,7 @@
 
 		<Gallio IgnoreFailures="false"
 				Files="@(TestOutput)"
-				ReportDirectory="TestsOutput\Report"
+				ReportDirectory="TestsReport"
 				ReportTypes="html;xml">
 			<Output TaskParameter="ExitCode" PropertyName="ExitCode"/>
 		</Gallio>
