@@ -33,14 +33,28 @@ namespace AbstractAir.Example.UI.Tests.Controllers
 		[Test]
 		public void CreateProductRedirectsToExampleIndex()
 		{
+			_commandBus.Stub(bus => bus.Send(Arg.Is(_exampleController), Arg<Action<ICreateProductMessage>>.Is.NotNull)).Return(true);
+
 			var result = _exampleController.CreateProduct(_createProductModel);
 
 			MvcAssert.IsRedirectToRouteResult(result, "Index");
 		}
 
 		[Test]
+		public void CreateProductShowsViewWhenValidationFails()
+		{
+			_commandBus.Stub(bus => bus.Send(Arg.Is(_exampleController), Arg<Action<ICreateProductMessage>>.Is.NotNull)).Return(false);
+
+			var result = _exampleController.CreateProduct(_createProductModel);
+
+			MvcAssert.IsViewResult(result);
+		}
+
+		[Test]
 		public void CreateProductSendsCreateProductMessage()
 		{
+			_commandBus.Stub(bus => bus.Send(Arg.Is(_exampleController), Arg<Action<ICreateProductMessage>>.Is.NotNull)).Return(true);
+
 			_exampleController.CreateProduct(_createProductModel);
 
 			_commandBus.AssertWasCalled(bus => bus.Send(Arg.Is(_exampleController), Arg<Action<ICreateProductMessage>>.Is.NotNull));

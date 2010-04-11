@@ -6,9 +6,9 @@ using AbstractAir.Examples.InternalMessages;
 
 namespace AbstractAir.Example.Validators
 {
-	public class CreateProductMessageValidator : IValidator<ICreateProductMessage>
+	public class CreateProductMessageValidator : ValidatorBase<ICreateProductMessage>
 	{
-		public IEnumerable<ValidationError> Validate(ICreateProductMessage message)
+		public override IEnumerable<ValidationError> Validate(ICreateProductMessage message)
 		{
 			ArgumentValidation.IsNotNull(message, "message");
 

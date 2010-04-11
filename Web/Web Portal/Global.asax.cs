@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 using AbstractAir.Example.UI;
+using AbstractAir.Example.Validators;
 using AbstractAir.Portal;
 using AbstractAir.Queries;
 
@@ -34,6 +35,7 @@ namespace AbstractAir.Web.Portal
 					initialise.AddRegistry<PortalRegistry>();
 					initialise.AddRegistry<SiteRegistry>();
 					initialise.AddRegistry<ExampleUIRegistry>();
+					initialise.AddRegistry<ValidatorsRegistry>();
 
 					initialise.For<IQueryConfiguration>().Use((IQueryConfiguration)ConfigurationManager.GetSection("queries"));
 				});
