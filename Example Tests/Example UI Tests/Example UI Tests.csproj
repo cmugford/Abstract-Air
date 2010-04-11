@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Tools\GallioBundle-3.1.397.0\bin\MbUnit.dll</HintPath>
     </Reference>
+    <Reference Include="Norm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=69a6583b49a2266e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Norm.dll</HintPath>
+    </Reference>
     <Reference Include="NServiceBus, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\NServiceBus.dll</HintPath>

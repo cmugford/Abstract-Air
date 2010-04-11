@@ -37,6 +37,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\MvcContrib.dll</HintPath>
     </Reference>
+    <Reference Include="Norm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=69a6583b49a2266e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Norm.dll</HintPath>
+    </Reference>
     <Reference Include="NServiceBus, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\NServiceBus.dll</HintPath>
@@ -66,6 +70,7 @@
     <Compile Include="Area\AreaRegistration.cs" />
     <Compile Include="Area\Controllers\ExampleController.cs" />
     <Compile Include="Area\Models\CreateProductModel.cs" />
+    <Compile Include="Area\Models\ProductSummaryModel.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ExampleUIRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +92,10 @@
       <Project>{7A13BD00-3F82-4073-A777-EB60C5757890}</Project>
       <Name>Example Internal Messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Example Query Schema\Example Query Schema.csproj">
+      <Project>{AFD53BBF-3983-45B5-80BD-AAA723D51C49}</Project>
+      <Name>Example Query Schema</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example Validators\Example Validators.csproj">
       <Project>{DDA316B3-8D3C-44BB-A172-330841955B8D}</Project>
       <Name>Example Validators</Name>
@@ -101,6 +110,9 @@
     <None Include="Area\Views\Example\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
+    <None Include="Area\Views\Example\Details.aspx" />
+    <Content Include="Area\Views\Web.config" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Area\Services\" />

@@ -8,6 +8,8 @@ using AbstractAir.Portal;
 using MbUnit.Framework;
 
 using Rhino.Mocks;
+using Norm.Linq;
+using System.Linq.Expressions;
 
 namespace AbstractAir.Example.UI.Tests.Controllers
 {
@@ -18,26 +20,28 @@ namespace AbstractAir.Example.UI.Tests.Controllers
 
 		private CreateProductModel _createProductModel;
 		private ICommandBus _commandBus;
+        private IMongoQueryProvider _mongoQueryProvider;
 		private ExampleController _exampleController;
 
 		[SetUp]
 		public void Setup()
 		{
 			_commandBus = MockRepository.GenerateStub<ICommandBus>();
+            _mongoQueryProvider = MockRepository.GenerateStub<IMongoQueryProvider>();
 
 			_createProductModel = new CreateProductModel { Name = TestName, Category = TestCategory };
 
-			_exampleController = new ExampleController(_commandBus);
+			_exampleController = new ExampleController(_commandBus, _mongoQueryProvider);
 		}
 
 		[Test]
-		public void CreateProductRedirectsToExampleIndex()
+		public void CreateProductRedirectsToDetails()
 		{
 			_commandBus.Stub(bus => bus.Send(Arg.Is(_exampleController), Arg<Action<ICreateProductMessage>>.Is.NotNull)).Return(true);
 
 			var result = _exampleController.CreateProduct(_createProductModel);
 
-			MvcAssert.IsRedirectToRouteResult(result, "Index");
+			MvcAssert.IsRedirectToRouteResult(result, "Details");
 		}
 
 		[Test]
