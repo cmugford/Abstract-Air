@@ -32,6 +32,7 @@ namespace AbstractAir.Web.Portal
 					initialise.AddRegistry<CoreRegistry>();
 					initialise.AddRegistry<QueryRegistry>();
 					initialise.AddRegistry<PortalRegistry>();
+					initialise.AddRegistry<SiteRegistry>();
 					initialise.AddRegistry<ExampleUIRegistry>();
 
 					initialise.For<IQueryConfiguration>().Use((IQueryConfiguration)ConfigurationManager.GetSection("queries"));

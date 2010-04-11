@@ -3,11 +3,12 @@ using System.Web.Mvc;
 
 using StructureMap.Configuration.DSL;
 
-namespace AbstractAir.Example.Web.StandAlone
+namespace AbstractAir.Web.Portal
 {
-	public class StandaloneRegistry : Registry
+	[CLSCompliant(false)]
+	public class SiteRegistry : Registry
 	{
-		public StandaloneRegistry()
+		public SiteRegistry()
 		{
 			Scan(scan =>
 				{

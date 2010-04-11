@@ -11,7 +11,6 @@ using StructureMap;
 
 namespace AbstractAir.Portal.Tests
 {
-	[TestFixture]
 	public class StructureMapControllerFactoryTestFixture
 	{
 		private const string ControllerName = "Test";

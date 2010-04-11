@@ -79,6 +79,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core Portal\Core Portal.csproj">
+      <Project>{BB7B4391-A581-4F69-BDC9-D5C299BAD921}</Project>
+      <Name>Core Portal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Example\Example Internal Messages\Example Internal Messages.csproj">
       <Project>{7A13BD00-3F82-4073-A777-EB60C5757890}</Project>
       <Name>Example Internal Messages</Name>

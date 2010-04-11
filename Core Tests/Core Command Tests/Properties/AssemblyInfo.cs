@@ -2,11 +2,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("AbstractAir.Example.Web.StandAlone")]
+[assembly: AssemblyTitle("Core Command Tests")]
 [assembly: AssemblyDescription("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("f4f99643-4629-44ff-9047-87f1337b7a11")]
+[assembly: Guid("7dabc872-b717-4868-acc1-0f558942bd0f")]
 
 [assembly: CLSCompliant(false)]

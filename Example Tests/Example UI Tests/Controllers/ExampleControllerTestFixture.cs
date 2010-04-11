@@ -3,10 +3,9 @@
 using AbstractAir.Example.UI.Area.Controllers;
 using AbstractAir.Example.UI.Area.Models;
 using AbstractAir.Examples.InternalMessages;
+using AbstractAir.Portal;
 
 using MbUnit.Framework;
-
-using NServiceBus;
 
 using Rhino.Mocks;
 
@@ -18,17 +17,17 @@ namespace AbstractAir.Example.UI.Tests.Controllers
 		private const string TestCategory = "Test Category";
 
 		private CreateProductModel _createProductModel;
-		private IBus _bus;
+		private ICommandBus _commandBus;
 		private ExampleController _exampleController;
 
 		[SetUp]
 		public void Setup()
 		{
-			_bus = MockRepository.GenerateStub<IBus>();
+			_commandBus = MockRepository.GenerateStub<ICommandBus>();
 
 			_createProductModel = new CreateProductModel { Name = TestName, Category = TestCategory };
 
-			_exampleController = new ExampleController(_bus);
+			_exampleController = new ExampleController(_commandBus);
 		}
 
 		[Test]
@@ -44,7 +43,7 @@ namespace AbstractAir.Example.UI.Tests.Controllers
 		{
 			_exampleController.CreateProduct(_createProductModel);
 
-			_bus.AssertWasCalled(bus => bus.Send(Arg<Action<ICreateProductMessage>>.Is.NotNull));
+			_commandBus.AssertWasCalled(bus => bus.Send(Arg.Is(_exampleController), Arg<Action<ICreateProductMessage>>.Is.NotNull));
 		}
 	}
 }

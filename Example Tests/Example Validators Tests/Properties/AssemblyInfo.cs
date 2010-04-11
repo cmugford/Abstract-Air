@@ -2,11 +2,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("AbstractAir.Example.Web.StandAlone")]
+[assembly: AssemblyTitle("Example Validators Tests")]
 [assembly: AssemblyDescription("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("f4f99643-4629-44ff-9047-87f1337b7a11")]
+[assembly: Guid("245a6557-e4d3-4453-b42e-57d2367898a7")]
 
 [assembly: CLSCompliant(false)]

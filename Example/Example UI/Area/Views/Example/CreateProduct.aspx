@@ -8,6 +8,7 @@
     <% Html.EnableClientValidation(); %>
 	<% using (Html.BeginForm()) { %>
 		<%= Html.AntiForgeryToken() %>
+		<%= Html.ValidationSummary() %>
 		<fieldset>
 			<legend>New Product</legend>
 			<label for="Name">Product Name:</label>

@@ -3,19 +3,18 @@ using System.Web.Mvc;
 
 using AbstractAir.Example.UI.Area.Models;
 using AbstractAir.Examples.InternalMessages;
-
-using NServiceBus;
+using AbstractAir.Portal;
 
 namespace AbstractAir.Example.UI.Area.Controllers
 {
     [HandleError]
     public class ExampleController : Controller
     {
-    	private readonly IBus _bus;
+    	private readonly ICommandBus _commandBus;
 
-		public ExampleController(IBus bus)
+		public ExampleController(ICommandBus commandBus)
 		{
-			_bus = ArgumentValidation.IsNotNull(bus, "bus");
+			_commandBus = ArgumentValidation.IsNotNull(commandBus, "commandBus");
 		}
 
         public ActionResult Index()
@@ -32,15 +31,14 @@ namespace AbstractAir.Example.UI.Area.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult CreateProduct(CreateProductModel createProductModel)
 		{
-			_bus.CreateInstance<ICreateProductMessage>();
-			_bus.Send<ICreateProductMessage>(message =>
+			var result = _commandBus.Send<ICreateProductMessage>(this, message =>
 				{
-					message.ProductId = Guid.NewGuid();
+					//message.ProductId = Guid.NewGuid();
 					message.Name = createProductModel.Name;
 					message.Category = createProductModel.Category;
 				});
 
-			return RedirectToAction("Index");
+			return result ? RedirectToAction("Index") : (ActionResult) View();
 		}
     }
 }
