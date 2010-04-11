@@ -33,7 +33,7 @@ namespace AbstractAir.Example.UI.Area.Controllers
 		{
 			var result = _commandBus.Send<ICreateProductMessage>(this, message =>
 				{
-					//message.ProductId = Guid.NewGuid();
+					message.ProductId = Guid.NewGuid();
 					message.Name = createProductModel.Name;
 					message.Category = createProductModel.Category;
 				});

@@ -164,6 +164,10 @@
       <Project>{44608CC0-BD9E-42FF-B256-DB7B90C0BAFA}</Project>
       <Name>Example UI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Example\Example Validators\Example Validators.csproj">
+      <Project>{DDA316B3-8D3C-44BB-A172-330841955B8D}</Project>
+      <Name>Example Validators</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,7 +5,6 @@ using MbUnit.Framework;
 
 namespace AbstractAir.Commands.Tests
 {
-	[TestFixture]
 	public class AssertNotDefaultTestFixture : ValidationExtensionsTestFixtureBase
 	{
 		[SetUp]

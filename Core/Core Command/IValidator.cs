@@ -6,9 +6,8 @@ using NServiceBus;
 namespace AbstractAir.Commands
 {
 	[CLSCompliant(false)]
-	public interface IValidator<TMessage>
-		where TMessage : IMessage
+	public interface IValidator
 	{
-		IEnumerable<ValidationError> Validate(TMessage message);
+		IEnumerable<ValidationError> Validate(IMessage message);
 	}
 }
